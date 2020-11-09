@@ -1,9 +1,18 @@
 import React from 'react'
 
+import Jumbotron from '../components/jumbotron';
+import useStyles from '../styles/pages/homepageStyles'
+
+
+
 const Homepage = () => {
+
+    const classes = useStyles();
     return (
-        <div>
-            homepage
+
+        <div className={classes.homepage}>
+            {/* Searchbar */}
+            <Jumbotron />
         </div>
     )
 }

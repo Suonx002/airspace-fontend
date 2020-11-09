@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@material-ui/core/styles'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import DateFnsUtils from "@date-io/date-fns";
+
+
 
 import './styles/index.css'
 import App from './App';
@@ -13,7 +17,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <App />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <App />
+        </MuiPickersUtilsProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
