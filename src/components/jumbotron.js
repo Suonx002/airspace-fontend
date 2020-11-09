@@ -50,7 +50,10 @@ const Jumbotron = () => {
             <form autoComplete="off" className={classes.jumbotronForm} onSubmit={onFormSubmit}>
                 <Grid container className={classes.jumbotronGridContainer}>
                     <Grid item className={classes.searchContainer}>
-                        <TextField variant="outlined"
+                        <TextField
+
+                            variant="outlined"
+
                             className={classes.searchInput}
                             label="Where"
 

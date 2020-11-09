@@ -44,11 +44,42 @@ export default makeStyles(theme => ({
         [theme.breakpoints.down(992)]: {
             flexBasis: '100%',
             marginBottom: '1.5rem'
-
         }
     },
     searchInput: {
-        width: '100%'
+        width: '100%',
+        // https://stackoverflow.com/questions/58963242/change-border-color-on-material-ui-textfield
+        // "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+        //     borderColor: "green"
+        // },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+            boxShadow: '0 0 2px 1px rgba(0,0,0,0.15)',
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+            boxShadow: '0 0 2px 2px rgba(0,0,0,0.25)',
+        },
+        // "& .MuiOutlinedInput-input": {
+        //     color: "green"
+        // },
+        // "&:hover .MuiOutlinedInput-input": {
+        //     color: "red"
+        // },
+        // "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+        //     color: "purple"
+        // },
+        // "& .MuiInputLabel-outlined": {
+        //     color: "green"
+        // },
+        // "&:hover .MuiInputLabel-outlined": {
+        //     color: "red"
+        // },
+        // "& .MuiInputLabel-outlined.Mui-focused": {
+        //     color: "purple"
+        // }
+
+
     },
     arriveContainer: {
         flexBasis: '15%',
@@ -63,6 +94,7 @@ export default makeStyles(theme => ({
             marginTop: 0,
             marginBottom: 0
         },
+
         [theme.breakpoints.down(992)]: {
             flexBasis: '25%',
             paddingLeft: 0
@@ -73,6 +105,14 @@ export default makeStyles(theme => ({
         },
     },
     arriveInput: {
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+            boxShadow: '0 0 2px 1px rgba(0,0,0,0.15)',
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+            boxShadow: '0 0 2px 2px rgba(0,0,0,0.25)',
+        },
         [theme.breakpoints.down(767)]: {
             width: '100%'
         }
@@ -99,6 +139,14 @@ export default makeStyles(theme => ({
         },
     },
     departInput: {
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+            boxShadow: '0 0 2px 1px rgba(0,0,0,0.15)',
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+            boxShadow: '0 0 2px 2px rgba(0,0,0,0.25)',
+        },
         [theme.breakpoints.down(767)]: {
             width: '100%'
         }
@@ -118,6 +166,14 @@ export default makeStyles(theme => ({
         },
     },
     guestsInput: {
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+            boxShadow: '0 0 2px 1px rgba(0,0,0,0.15)',
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+            boxShadow: '0 0 2px 2px rgba(0,0,0,0.25)',
+        },
         [theme.breakpoints.down(767)]: {
             width: '100%'
         }
