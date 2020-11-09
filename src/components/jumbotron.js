@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DatePicker } from '@material-ui/pickers'
 
-import { TextField, Grid, Button, InputAdornment } from '@material-ui/core'
+import { TextField, Grid, Button, InputAdornment, Typography } from '@material-ui/core'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EventIcon from '@material-ui/icons/Event';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
@@ -46,6 +46,7 @@ const Jumbotron = () => {
 
     return (
         <div className={classes.jumbotron}>
+            <Typography variant="h1" className={classes.jumbotronTitle}>Find the perfect vacation rental</Typography>
             <form autoComplete="off" className={classes.jumbotronForm} onSubmit={onFormSubmit}>
                 <Grid container className={classes.jumbotronGridContainer}>
                     <Grid item className={classes.searchContainer}>

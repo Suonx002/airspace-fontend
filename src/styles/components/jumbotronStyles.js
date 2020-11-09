@@ -6,15 +6,21 @@ export default makeStyles(theme => ({
 
     jumbotron: {
         background: ` linear-gradient(
-            rgba(0, 0, 0, 0.4), 
-            rgba(0, 0, 0, 0.4)
+            rgba(0, 0, 0, 0.75), 
+            rgba(0, 0, 0, 0.75)
           ),url(${LandingJumbo}) no-repeat center center/cover`,
         minHeight: '50vh',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: '2rem',
         paddingBottom: '2rem',
+    },
+    jumbotronTitle: {
+        color: theme.palette.common.white,
+        letterSpacing: '2px',
+        fontVariant: 'all-petite-caps'
     },
     jumbotronForm: {
 

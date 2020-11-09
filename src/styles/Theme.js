@@ -7,6 +7,8 @@ const primaryColor = '#132e46';
 const secondaryColor = '#27ae60'
 const tertiaryColor = '#8e44ad';
 
+
+
 export default createMuiTheme({
     palette: {
         common: {
@@ -23,22 +25,29 @@ export default createMuiTheme({
     },
     typography: {
         h1: {
-            fontFamily: 'Cabin, sans-serif'
+            fontFamily: 'Cabin, sans-serif',
+            fontSize: '3.5rem',
+            fontWeight: 700,
         },
         h2: {
-            fontFamily: 'Cabin, sans-serif'
+            fontFamily: 'Cabin, sans-serif',
+            fontSize: '2.5rem',
         },
         h3: {
-            fontFamily: 'Cabin, sans-serif'
+            fontFamily: 'Cabin, sans-serif',
+            fontSize: '2rem',
         },
         h4: {
-            fontFamily: 'Cabin, sans-serif'
+            fontFamily: 'Cabin, sans-serif',
+            fontSize: '1.85rem',
         },
         h5: {
-            fontFamily: 'Cabin, sans-serif'
+            fontFamily: 'Cabin, sans-serif',
+            fontSize: '1.5rem',
         },
         h6: {
-            fontFamily: 'Cabin, sans-serif'
+            fontFamily: 'Cabin, sans-serif',
+            fontSize: '1.3rem',
         },
 
     }
