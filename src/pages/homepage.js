@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Jumbotron from '../components/jumbotron';
+import PropertyListing from '../components/property/propertyListing';
 import useStyles from '../styles/pages/homepageStyles'
 
 
@@ -13,6 +14,9 @@ const Homepage = () => {
         <div className={classes.homepage}>
             {/* Searchbar */}
             <Jumbotron />
+
+            {/* recommended listing */}
+            <PropertyListing />
         </div>
     )
 }

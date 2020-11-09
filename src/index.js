@@ -9,7 +9,7 @@ import DateFnsUtils from "@date-io/date-fns";
 
 import './styles/index.css'
 import App from './App';
-import theme from './styles/Theme'
+import theme from './styles/theme'
 import reportWebVitals from './reportWebVitals';
 
 

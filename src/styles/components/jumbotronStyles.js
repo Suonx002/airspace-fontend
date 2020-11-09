@@ -20,7 +20,19 @@ export default makeStyles(theme => ({
     jumbotronTitle: {
         color: theme.palette.common.white,
         letterSpacing: '2px',
-        fontVariant: 'all-petite-caps'
+        fontVariant: 'all-petite-caps',
+        textAlign: 'center',
+        paddingLeft: 20,
+        paddingRight: 20,
+        [theme.breakpoints.down(992)]: {
+            fontSize: '3rem'
+        },
+        [theme.breakpoints.down(767)]: {
+            fontSize: '2.5rem'
+        },
+        [theme.breakpoints.down(500)]: {
+            fontSize: '2.2rem'
+        },
     },
     jumbotronForm: {
 
