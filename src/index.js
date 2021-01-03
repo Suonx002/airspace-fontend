@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { SnackbarProvider } from 'notistack';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -25,11 +26,16 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <App />
-          </MuiPickersUtilsProvider>
-        </BrowserRouter>
+        <SnackbarProvider maxSnack={3} anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center'
+        }}>
+          <BrowserRouter>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <App />
+            </MuiPickersUtilsProvider>
+          </BrowserRouter>
+        </SnackbarProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
