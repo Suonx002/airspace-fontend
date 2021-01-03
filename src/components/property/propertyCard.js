@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 
-import useStyles from '../../styles/components/property/propertyCardStyles'
+import useStyles from '../../styles/components/property/propertyCardStyles';
 
 const PropertyCard = (props) => {
 
@@ -28,16 +28,16 @@ const PropertyCard = (props) => {
                     Sleeps <span className={classes.sleep}>{sleep}</span> <span className={classes.bedroom}>{bedroom}</span> BR <span className={classes.bathroom}>{bathroom}</span> BA
                 </p>
                 <p className={classes.propertyStars}>
-                    <span class={classes.propertyStar}>*</span>
-                    <span class={classes.propertyStar}>*</span>
-                    <span class={classes.propertyStar}>*</span>
-                    <span class={classes.propertyStar}>*</span>
-                    <span class={classes.propertyStar}>*</span>
+                    <span className={classes.propertyStar}>*</span>
+                    <span className={classes.propertyStar}>*</span>
+                    <span className={classes.propertyStar}>*</span>
+                    <span className={classes.propertyStar}>*</span>
+                    <span className={classes.propertyStar}>*</span>
                 </p>
                 <p className={classes.propertyPrice}>${price} avg/night</p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default PropertyCard
+export default PropertyCard;

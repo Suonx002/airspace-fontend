@@ -9,7 +9,11 @@ export default makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
+    toolbarMargin: {
+        ...theme.mixins.toolbar
+    },
     logoContainer: {
+        padding: 0,
         "&:hover": {
             backgroundColor: 'transparent'
         }
@@ -21,18 +25,6 @@ export default makeStyles(theme => ({
         width: 40,
         height: 40
     },
-    profileMenu: {
-        marginTop: 55
-    },
-    profileMenuItem: {
-        textAlign: 'center',
-        minWidth: 150,
-        padding: '0.5rem',
-
-    },
-    profileMenuTitle: {
-        width: '100%'
-    },
     desktopMenu: {
 
         "& > *:not(:last-child)": {
@@ -40,27 +32,34 @@ export default makeStyles(theme => ({
         },
         "& > *:not(:first-child)": {
             marginLeft: '0.5rem',
+        },
+        [theme.breakpoints.down(768)]: {
+            display: 'none'
         }
     },
-    hostBtn: {
-        textTransform: 'none'
-    },
-    signupBtn: {
-        fontSize: '1.3rem',
-        textTransform: ' none',
-        "& > span": {
-            color: theme.palette.primary.main
+    menuIconContainer: {
+        padding: 0,
+        "&:hover": {
+            backgroundColor: 'transparent',
+        },
+        [theme.breakpoints.up(768)]: {
+            display: 'none'
         }
-    },
-    loginBtn: {
-        fontSize: '1.3rem',
-        textTransform: ' none',
-        "& > span": {
-            color: theme.palette.primary.main
-        }
-    },
-    startIcon: {
-        fontSize: '1.3rem !important'
 
+    },
+    menuIcon: {
+        fontSize: 20,
+        fill: theme.palette.primary.main,
+        padding: '0.35rem',
+        border: `0.5px solid ${theme.palette.primary.main}`,
+        borderRadius: '50%',
+        transition: 'all 0.2s ease-in-out',
+        "&:hover": {
+            backgroundColor: " pink",
+            fill: theme.palette.primary.light,
+            border: `0.5px solid ${theme.palette.primary.light}`,
+            transform: 'scale(1.05)'
+        }
     }
+
 }));

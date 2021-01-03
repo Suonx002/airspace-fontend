@@ -1,8 +1,8 @@
 import * as auth from '../actions/auth/authTypes';
 
 
-const initalState = {
-    isAuthenticated: null,
+const initialState = {
+    isAuthenticated: false,
     user: null,
     token: null,
     isLoading: true,
@@ -10,8 +10,8 @@ const initalState = {
 };
 
 
-export default (state = initalState, actions) => {
-    switch (actions.type) {
+export default (state = initialState, action) => {
+    switch (action.type) {
         default:
             return state;
     }

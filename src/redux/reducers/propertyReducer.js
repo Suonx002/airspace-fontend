@@ -1,7 +1,7 @@
 import * as property from '../actions/property/propertyTypes';
 
 
-const initalState = {
+const initialState = {
     property: null,
     allProperties: [],
     currentProperty: null,
@@ -9,8 +9,8 @@ const initalState = {
     error: null
 };
 
-export default (state = initalState, actions) => {
-    switch (actions.type) {
+export default (state = initialState, action) => {
+    switch (action.type) {
         default:
             return state;
     }
