@@ -8,6 +8,7 @@ import Homepage from './pages/homepage';
 
 // Private Routes
 import PropertyForm from './components/property/propertyForm';
+import Navbar from './components/navbar/navbar';
 
 
 
@@ -29,19 +30,22 @@ const privateRoutes = [
 
 const App = () => {
   return (
-    <Switch>
-      {/* Public Routes */}
-      {publicRoutes.map((route, i) => (
-        <Route exact path={route.to} component={route.component} key={`${route.component}-${i}`} />
-      ))}
+    <>
+      <Navbar />
+      <Switch>
+        {/* Public Routes */}
+        {publicRoutes.map((route, i) => (
+          <Route exact path={route.to} component={route.component} key={`${route.component}-${i}`} />
+        ))}
 
-      {/* Private Routes */}
-      {privateRoutes.map((route, i) => (
-        <PrivateRoute exact path={route.to} component={route.component} key={`${route.component}-${i}`} />
-      ))}
+        {/* Private Routes */}
+        {privateRoutes.map((route, i) => (
+          <PrivateRoute exact path={route.to} component={route.component} key={`${route.component}-${i}`} />
+        ))}
 
-      {/* Admin Routes */}
-    </Switch>
+        {/* Admin Routes */}
+      </Switch>
+    </>
   );
 };
 

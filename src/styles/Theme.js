@@ -1,11 +1,12 @@
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles';
 
 
 
 
 const primaryColor = '#132e46';
-const secondaryColor = '#27ae60'
+const secondaryColor = '#27ae60';
 const tertiaryColor = '#8e44ad';
+const darkText = '#323232';
 
 
 
@@ -14,7 +15,8 @@ export default createMuiTheme({
         common: {
             primaryColor,
             secondaryColor,
-            tertiaryColor
+            tertiaryColor,
+            darkText
         },
         primary: {
             main: primaryColor
@@ -51,4 +53,4 @@ export default createMuiTheme({
         },
 
     }
-})
+});
