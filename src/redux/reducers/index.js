@@ -2,9 +2,12 @@ import { combineReducers } from 'redux';
 
 import authReducer from './authReducer';
 import propertyReducer from './propertyReducer';
+import modalReducer from './modalReducer';
 
-export default combineReducers({
+const allReducers = combineReducers({
     auth: authReducer,
-    property: propertyReducer
-
+    property: propertyReducer,
+    modal: modalReducer
 });
+
+export default allReducers;

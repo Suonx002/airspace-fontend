@@ -9,10 +9,11 @@ const initialState = {
     error: null
 };
 
-
-export default (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state;
     }
 };
+
+export default authReducer;

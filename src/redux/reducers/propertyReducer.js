@@ -9,9 +9,11 @@ const initialState = {
     error: null
 };
 
-export default (state = initialState, action) => {
+const propertyReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state;
     }
 };
+
+export default propertyReducer;

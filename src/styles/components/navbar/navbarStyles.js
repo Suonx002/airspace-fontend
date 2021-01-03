@@ -7,7 +7,10 @@ export default makeStyles(theme => ({
     toolbar: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingTop: '0.5rem',
+        paddingBottom: '0.5rem',
+
     },
     toolbarMargin: {
         ...theme.mixins.toolbar
@@ -19,7 +22,8 @@ export default makeStyles(theme => ({
         }
     },
     logo: {
-        maxWidth: 100
+        maxWidth: 120,
+        objectFit: 'contain'
     },
     avatar: {
         width: 40,
@@ -55,7 +59,6 @@ export default makeStyles(theme => ({
         borderRadius: '50%',
         transition: 'all 0.2s ease-in-out',
         "&:hover": {
-            backgroundColor: " pink",
             fill: theme.palette.primary.light,
             border: `0.5px solid ${theme.palette.primary.light}`,
             transform: 'scale(1.05)'
