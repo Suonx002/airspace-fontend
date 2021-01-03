@@ -14,7 +14,8 @@ const mockup = [
         bedroom: 4,
         bathroom: 3,
         ratingAverage: 5,
-        numberOfReviews: 79
+        numberOfReviews: 79,
+        price: '150'
     },
     {
         id: 2,
@@ -24,7 +25,9 @@ const mockup = [
         bedroom: 5,
         bathroom: 4,
         ratingAverage: 5,
+        price: '150',
         numberOfReviews: 142
+
     },
     {
         id: 3,
@@ -35,6 +38,7 @@ const mockup = [
         bathroom: 3,
         ratingAverage: 5,
         numberOfReviews: 53
+        , price: '150'
     },
     {
         id: 4,
@@ -44,7 +48,8 @@ const mockup = [
         bedroom: 1,
         bathroom: 1,
         ratingAverage: 4.6,
-        numberOfReviews: 9
+        numberOfReviews: 9,
+        price: '150'
     },
     {
         id: 5,
@@ -54,7 +59,8 @@ const mockup = [
         bedroom: 6,
         bathroom: 3,
         ratingAverage: 4,
-        numberOfReviews: 95
+        numberOfReviews: 95,
+        price: '150'
     },
     {
         id: 6,
@@ -64,7 +70,8 @@ const mockup = [
         bedroom: 1,
         bathroom: 1,
         ratingAverage: 5,
-        numberOfReviews: 4
+        numberOfReviews: 4,
+        price: '150'
     },
 
 ]

@@ -5,6 +5,10 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFnsUtils from "@date-io/date-fns";
 
+// slick slider
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 
 import './styles/index.css'
