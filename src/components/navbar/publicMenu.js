@@ -10,7 +10,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import useStyles from '../../styles/components/navbar/publicMenuStyles';
 
-import { showSignupModal } from '../../redux/actions/modal/modalActions';
+import { showSignupModal, showLoginModal } from '../../redux/actions/modal/modalActions';
 import Signup from '../auth/signup';
 import Login from '../auth/login';
 
@@ -40,11 +40,10 @@ const PublicMenu = () => {
         },
         {
             title: 'Login',
-            link: Link,
-            to: '/login',
             className: 'loginBtn',
             icon: PersonIcon,
-            variant: 'text'
+            variant: 'text',
+            onClick: () => dispatch(showLoginModal())
         },
 
     ];

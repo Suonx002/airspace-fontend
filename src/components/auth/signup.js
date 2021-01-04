@@ -7,7 +7,7 @@ import * as yup from 'yup';
 import { Dialog, DialogContent, Box, Button, CircularProgress, Typography } from '@material-ui/core';
 import useStyles from '../../styles/components/auth/signupStyles';
 
-import { showSignupModal, closeSignupModal } from '../../redux/actions/modal/modalActions';
+import { closeSignupModal } from '../../redux/actions/modal/modalActions';
 
 const Signup = () => {
 
@@ -31,9 +31,9 @@ const Signup = () => {
         password: yup.string().min(5).max(50).required('Password must be between 5 to 50 characters')
     });
 
-    const onSubmit = (values, other) => {
+    const onSubmit = (values, { setSubmitting }) => {
         console.log({
-            values, other
+            values, setSubmitting
         });
     };
 
