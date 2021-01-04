@@ -4,7 +4,7 @@ import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import * as yup from 'yup';
 
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box, Button } from '@material-ui/core';
+import { Dialog, DialogContent, Box, Button, CircularProgress, Typography } from '@material-ui/core';
 import useStyles from '../../styles/components/auth/signupStyles';
 
 import { showSignupModal, closeSignupModal } from '../../redux/actions/modal/modalActions';
@@ -24,11 +24,11 @@ const Signup = () => {
     };
 
     const validationSchema = yup.object().shape({
-        username: yup.string().trim().min(3).required(),
-        firstName: yup.string().trim().min(2).required(),
-        lastName: yup.string().trim().min(2).required(),
-        email: yup.string().trim().email().required(),
-        password: yup.string().min(5).max(50).required()
+        username: yup.string().trim().min(3).required('Username must be at least 3 characters long'),
+        firstName: yup.string().trim().min(2).required('First name must be at least 2 characters long'),
+        lastName: yup.string().trim().min(2).required('Last name must be at least 2 characters long'),
+        email: yup.string().trim().email().required('Email must be valid'),
+        password: yup.string().min(5).max(50).required('Password must be between 5 to 50 characters')
     });
 
     const onSubmit = (values, other) => {
@@ -42,63 +42,67 @@ const Signup = () => {
             label: 'First Name',
             name: 'firstName',
             type: 'text',
-            component: TextField
+            component: TextField,
         },
         {
             label: 'Last Name',
             name: 'lastName',
             type: 'lastName',
-            component: TextField
+            component: TextField,
         },
         {
             label: 'Username',
             name: 'username',
             type: 'text',
-            component: TextField
+            component: TextField,
         },
         {
             label: 'Email',
             name: 'email',
             type: 'email',
-            component: TextField
+            component: TextField,
         },
         {
             label: 'Password',
             name: 'password',
             type: 'password',
-            component: TextField
+            component: TextField,
         },
 
     ];
 
 
     return (
-        <Dialog open={signupModal} onClose={() => dispatch(closeSignupModal())} aria-labelledby="signup-dialog">
-            <DialogTitle>Sign Up Form</DialogTitle>
-            <DialogContent>
+        <Dialog open={signupModal} onClose={() => dispatch(closeSignupModal())} aria-labelledby="signup-dialog" maxWidth="sm" className={classes.dialog}>
+            <Typography className={classes.dialogTitle} variant="h3">
+                Sign Up Form
+            </Typography>
+            <DialogContent >
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
                 >
                     {({ submitForm, isSubmitting }) => (
-                        <Form>
+                        <Form className={classes.form}>
                             {signupFields.map(field => (
-                                <Box margin={1} key={field.name}>
+                                <Box margin={1} key={field.name} className={classes.fieldBox}>
                                     <Field
                                         component={field.component}
                                         label={field.label}
                                         name={field.name}
                                         type={field.type}
+                                        variant="outlined"
+                                        className={classes[field.name]}
                                     />
                                 </Box>
                             ))}
-                            <Box margin={1}>
-                                <Button variant="outlined" color="secondary" onClick={() => dispatch(closeSignupModal())}>
+                            <Box margin={1} className={classes.btnActions}>
+                                <Button variant="outlined" onClick={() => dispatch(closeSignupModal())} className={classes.cancelBtn}>
                                     Cancel
                                 </Button>
-                                <Button variant="contained" color="primary" disabled={isSubmitting} onClick={submitForm}>
-                                    Submit
+                                <Button variant="contained" color="primary" disabled={isSubmitting} onClick={submitForm} className={classes.submitBtn}>
+                                    {isSubmitting ? <CircularProgress className={classes.loadingSpinner} /> : 'Submit'}
                                 </Button>
                             </Box>
                         </Form>
