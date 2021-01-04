@@ -23,10 +23,13 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <SnackbarProvider maxSnack={3} anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center'
-        }}>
+        <SnackbarProvider
+          autoHideDuration={3000}
+          maxSnack={3}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center'
+          }}>
           <BrowserRouter>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <App />

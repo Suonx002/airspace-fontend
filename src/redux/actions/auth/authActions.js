@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as auth from './authTypes';
 
 import setAuthToken from '../../../utils/setAuthToken';
-
+import { closeLoginModal, closeSignupModal } from '../modal/modalActions';
 
 export const getAuthUser = () => async dispatch => {
     try {
@@ -18,7 +18,6 @@ export const getAuthUser = () => async dispatch => {
         dispatch({
             type: auth.AUTH_ERROR,
             payload: err.response.data.message
-
         });
     }
 };
@@ -33,6 +32,7 @@ export const signupUser = (data, enqueueSnackbar, setSubmitting) => async dispat
         });
 
         setSubmitting(false);
+        dispatch(closeLoginModal());
         enqueueSnackbar('Successfully register an account!', {
             variant: 'success'
         });
@@ -60,13 +60,13 @@ export const loginUser = (data, enqueueSnackbar, setSubmitting) => async dispatc
         });
 
         setSubmitting(false);
+        dispatch(closeLoginModal());
         enqueueSnackbar('Successfully login!', {
             variant: 'success'
         });
 
     } catch (err) {
 
-        console.log({ error: err.response });
         dispatch({
             type: auth.AUTH_ERROR,
             payload: err.response.data.message

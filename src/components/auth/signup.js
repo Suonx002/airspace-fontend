@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import * as yup from 'yup';
+import { useSnackbar } from 'notistack';
 
 import { Dialog, DialogContent, Box, Button, CircularProgress, Typography } from '@material-ui/core';
 import useStyles from '../../styles/components/auth/signupStyles';
 
 import { closeSignupModal } from '../../redux/actions/modal/modalActions';
+import { signupUser } from '../../redux/actions/auth/authActions';
 
 const Signup = () => {
 
     const classes = useStyles();
+    const { enqueueSnackbar } = useSnackbar();
     const dispatch = useDispatch();
     const { signupModal } = useSelector(state => state.modal);
 
@@ -32,9 +35,7 @@ const Signup = () => {
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-        console.log({
-            values, setSubmitting
-        });
+        dispatch(signupUser(values, enqueueSnackbar, setSubmitting));
     };
 
     const signupFields = [

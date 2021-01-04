@@ -25,7 +25,7 @@ const Login = () => {
     };
 
     const validationSchema = yup.object().shape({
-        email: yup.string().trim().email().required('Email must be valid'),
+        email: yup.string().lowercase().trim().email().required('Email must be valid'),
         password: yup.string().required('Password is required')
     });
 
