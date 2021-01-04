@@ -5,11 +5,15 @@ import { TextField } from 'formik-material-ui';
 import * as yup from 'yup';
 import { useSnackbar } from 'notistack';
 
-import { Dialog, DialogContent, Box, Button, CircularProgress, Typography } from '@material-ui/core';
+import { Dialog, DialogContent, Box, Button, CircularProgress, Typography, Slide } from '@material-ui/core';
 import useStyles from '../../styles/components/auth/signupStyles';
 
 import { closeSignupModal } from '../../redux/actions/modal/modalActions';
 import { signupUser } from '../../redux/actions/auth/authActions';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Signup = () => {
 
@@ -74,7 +78,13 @@ const Signup = () => {
 
 
     return (
-        <Dialog open={signupModal} onClose={() => dispatch(closeSignupModal())} aria-labelledby="signup-dialog" maxWidth="sm" className={classes.dialog}>
+        <Dialog
+            TransitionComponent={Transition}
+            open={signupModal}
+            onClose={() => dispatch(closeSignupModal())}
+            aria-labelledby="signup-dialog"
+            maxWidth="sm"
+            className={classes.dialog}>
             <Typography className={classes.dialogTitle} variant="h3">
                 Sign Up Form
             </Typography>
