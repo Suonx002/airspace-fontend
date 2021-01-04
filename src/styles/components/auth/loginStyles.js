@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
+
     dialog: {
         paddingTop: '2rem',
         paddingBottom: '2rem',
@@ -10,7 +11,8 @@ export default makeStyles(theme => ({
         },
         "& .MuiDialog-paper": {
             margin: 16
-        }
+        },
+
     },
     dialogTitle: {
         textTransform: 'uppercase',

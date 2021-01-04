@@ -11,6 +11,8 @@ import useStyles from '../../styles/components/auth/signupStyles';
 import { closeLoginModal, showSignupModal } from '../../redux/actions/modal/modalActions';
 import { loginUser } from '../../redux/actions/auth/authActions';
 
+import AdventureIcon from '../../assets/adventure.svg';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -60,6 +62,18 @@ const Login = () => {
             onClose={() => dispatch(closeLoginModal())}
             aria-labelledby="login-dialog" maxWidth="sm"
             className={classes.dialog}>
+
+            {/* make styles doesn't work, will have to inline styles */}
+            <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+                <img
+                    src={AdventureIcon}
+                    alt="adventure" style={{
+                        maxWidth: '50%',
+                        maxHeight: 200
+
+                    }} />
+            </div>
+
             <Typography className={classes.dialogTitle} variant="h3">
                 Login
             </Typography>
@@ -101,6 +115,7 @@ const Login = () => {
                                     {isSubmitting ? <CircularProgress className={classes.loadingSpinner} /> : 'Submit'}
                                 </Button>
                             </Box>
+
                         </Form>
                     )}
                 </Formik>

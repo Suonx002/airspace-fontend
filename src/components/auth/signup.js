@@ -11,6 +11,10 @@ import useStyles from '../../styles/components/auth/signupStyles';
 import { closeSignupModal, showLoginModal } from '../../redux/actions/modal/modalActions';
 import { signupUser } from '../../redux/actions/auth/authActions';
 
+
+import TravelerIcon from '../../assets/traveler.svg';
+
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -85,8 +89,17 @@ const Signup = () => {
             aria-labelledby="signup-dialog"
             maxWidth="sm"
             className={classes.dialog}>
+            {/* make styles doesn't work, will have to inline styles */}
+            <div style={{ textAlign: 'center', marginBottom: '1rem' }} >
+                <img
+                    src={TravelerIcon}
+                    alt="traverler" style={{
+                        maxWidth: '50%',
+                        maxHeight: 200
+                    }} />
+            </div>
             <Typography className={classes.dialogTitle} variant="h3">
-                Sign Up Form
+                Sign Up
             </Typography>
             <DialogContent >
                 <Formik
