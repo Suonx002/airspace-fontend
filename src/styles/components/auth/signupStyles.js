@@ -48,6 +48,21 @@ export default makeStyles(theme => ({
     loadingSpinner: {
         width: '25px !important',
         height: '25px !important',
+    },
+    haveAccount: {
+    },
+    haveAccountText: {
+        fontSize: 14,
+        letterSpacing: '1px'
+
+    },
+    haveAccountBtn: {
+        textTransform: 'none',
+        padding: '0',
+        '&:hover': {
+            backgroundColor: 'transparent',
+            textDecoration: 'underline'
+        }
     }
 
 }));

@@ -8,7 +8,7 @@ import { useSnackbar } from 'notistack';
 import { Dialog, DialogContent, Box, Button, CircularProgress, Typography, Slide } from '@material-ui/core';
 import useStyles from '../../styles/components/auth/signupStyles';
 
-import { closeLoginModal } from '../../redux/actions/modal/modalActions';
+import { closeLoginModal, showSignupModal } from '../../redux/actions/modal/modalActions';
 import { loginUser } from '../../redux/actions/auth/authActions';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -83,6 +83,16 @@ const Login = () => {
                                     />
                                 </Box>
                             ))}
+                            <Box margin={2} className={classes.haveAccount}>
+                                <Typography variant="body1" className={classes.haveAccountText}>
+                                    Don't have an account? <Button
+                                        className={classes.haveAccountBtn}
+                                        onClick={() => {
+                                            dispatch(closeLoginModal());
+                                            dispatch(showSignupModal());
+                                        }}>click here</Button>
+                                </Typography>
+                            </Box>
                             <Box margin={1} className={classes.btnActions}>
                                 <Button variant="outlined" onClick={() => dispatch(closeLoginModal())} className={classes.cancelBtn}>
                                     Cancel
