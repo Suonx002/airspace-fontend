@@ -19,9 +19,6 @@ import theme from './styles/theme';
 import reportWebVitals from './reportWebVitals';
 
 import store from './redux/reduxStore';
-
-
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

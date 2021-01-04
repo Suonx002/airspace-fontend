@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import useStyles from './styles/appStyles';
 
 import PrivateRoute from './utils/PrivateRoute';
 
@@ -14,6 +15,7 @@ import Navbar from './components/navbar/navbar';
 
 import { getAuthUser } from './redux/actions/auth/authActions';
 import setAuthToken from './utils/setAuthToken';
+
 
 const publicRoutes = [
   {
@@ -33,6 +35,7 @@ const privateRoutes = [
 
 const App = () => {
 
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,7 +49,7 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <div className={classes.app}>
       <Navbar />
       <Switch>
         {/* Public Routes */}
@@ -61,7 +64,7 @@ const App = () => {
 
         {/* Admin Routes */}
       </Switch>
-    </>
+    </div>
   );
 };
 

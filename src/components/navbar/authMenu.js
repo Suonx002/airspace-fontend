@@ -1,14 +1,20 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSnackbar } from 'notistack';
 
 import { Typography, Button, IconButton, Menu, MenuItem, Avatar } from '@material-ui/core';
 
 import useStyles from '../../styles/components/navbar/authMenuStyles';
 
+import { logoutUser } from '../../redux/actions/auth/authActions';
+
 const AuthMenu = () => {
 
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();
 
     // handle menu dropdown (avatar)
     const [avatarAnchor, setAvatarAnchor] = useState(null);
@@ -36,7 +42,12 @@ const AuthMenu = () => {
                 <MenuItem onClick={handleAvatarAnchorClose} className={classes.profileMenuItem}>
                     <Typography variant="inherit" className={classes.profileMenuTitle}>Profile</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleAvatarAnchorClose} className={classes.profileMenuItem}>
+                <MenuItem
+                    onClick={() => {
+                        dispatch(logoutUser(enqueueSnackbar));
+                        handleAvatarAnchorClose();
+                    }}
+                    className={classes.profileMenuItem}>
                     <Typography variant="inherit" className={classes.profileMenuTitle}>Logout</Typography>
                 </MenuItem>
             </Menu>

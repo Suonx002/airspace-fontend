@@ -16,7 +16,9 @@ export const getAuthUser = () => async dispatch => {
 
     } catch (err) {
         dispatch({
-            type: auth.AUTH_ERROR
+            type: auth.AUTH_ERROR,
+            payload: err.response.data.message
+
         });
     }
 };
@@ -38,6 +40,7 @@ export const signupUser = (data, enqueueSnackbar, setSubmitting) => async dispat
     } catch (err) {
         dispatch({
             type: auth.AUTH_ERROR,
+            payload: err.response.data.message
         });
 
         setSubmitting(false);
@@ -66,7 +69,7 @@ export const loginUser = (data, enqueueSnackbar, setSubmitting) => async dispatc
         console.log({ error: err.response });
         dispatch({
             type: auth.AUTH_ERROR,
-            payload: err.response
+            payload: err.response.data.message
         });
 
         setSubmitting(false);
@@ -76,6 +79,15 @@ export const loginUser = (data, enqueueSnackbar, setSubmitting) => async dispatc
     }
 };
 
+
+export const logoutUser = (enqueueSnackbar) => dispatch => {
+    dispatch({
+        type: auth.LOGOUT_USER
+    });
+    enqueueSnackbar('Successfully logout!', {
+        variant: 'success'
+    });
+};
 
 
 

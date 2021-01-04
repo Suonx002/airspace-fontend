@@ -17,6 +17,9 @@ const authReducer = (state = initialState, action) => {
         case auth.SIGNUP_SUCCESS:
             localStorage.setItem('jwtToken', action.payload.token);
             return { ...state, isAuthenticated: true, token: action.payload.token, isLoading: false };
+        case auth.LOGOUT_USER:
+            localStorage.removeItem('jwtToken');
+            return { ...state, isAuthenticated: false, token: null, isLoading: false };
         case auth.AUTH_ERROR:
             localStorage.removeItem('jwtToken');
             return { ...state, isAuthenticated: false, token: null, error: action.payload, isLoading: false };
