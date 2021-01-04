@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 
 import PrivateRoute from './utils/PrivateRoute';
 
@@ -10,7 +12,8 @@ import Homepage from './pages/homepage';
 import PropertyForm from './components/property/propertyForm';
 import Navbar from './components/navbar/navbar';
 
-
+import { getAuthUser } from './redux/actions/auth/authActions';
+import setAuthToken from './utils/setAuthToken';
 
 const publicRoutes = [
   {
@@ -29,6 +32,19 @@ const privateRoutes = [
 
 
 const App = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    if (localStorage.jwtToken) {
+      setAuthToken(localStorage.jwtToken);
+      dispatch(getAuthUser());
+    }
+
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <>
       <Navbar />

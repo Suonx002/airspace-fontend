@@ -1,4 +1,5 @@
 export const GET_AUTH_USER = 'GET_AUTH_USER';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 

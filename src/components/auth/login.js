@@ -9,7 +9,8 @@ import { Dialog, DialogContent, Box, Button, CircularProgress, Typography } from
 import useStyles from '../../styles/components/auth/signupStyles';
 
 import { closeLoginModal } from '../../redux/actions/modal/modalActions';
-// import { } from '../../redux/actions/auth/authActions';
+import { loginUser } from '../../redux/actions/auth/authActions';
+
 
 const Login = () => {
 
@@ -29,9 +30,7 @@ const Login = () => {
     });
 
     const onSubmit = (values, { setSubmitting }) => {
-        console.log({
-            values, setSubmitting
-        });
+        dispatch(loginUser(values, enqueueSnackbar, setSubmitting));
     };
 
     const loginFields = [
