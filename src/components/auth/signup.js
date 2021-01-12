@@ -6,13 +6,14 @@ import * as yup from 'yup';
 import { useSnackbar } from 'notistack';
 
 import { Dialog, DialogContent, Box, Button, CircularProgress, Typography, Slide } from '@material-ui/core';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
 import useStyles from '../../styles/components/auth/signupStyles';
 
 import { closeSignupModal, showLoginModal } from '../../redux/actions/modal/modalActions';
 import { signupUser } from '../../redux/actions/auth/authActions';
 
 
-import TravelerIcon from '../../assets/traveler.svg';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -89,17 +90,9 @@ const Signup = () => {
             aria-labelledby="signup-dialog"
             maxWidth="sm"
             className={classes.dialog}>
-            {/* make styles doesn't work, will have to inline styles */}
-            <div style={{ textAlign: 'center', marginBottom: '1rem' }} >
-                <img
-                    src={TravelerIcon}
-                    alt="traverler" style={{
-                        maxWidth: '50%',
-                        maxHeight: 200
-                    }} />
-            </div>
+
             <Typography className={classes.dialogTitle} variant="h3">
-                Sign Up
+                <AccountCircleIcon className={classes.signupIcon} /> <span>Sign Up</span>
             </Typography>
             <DialogContent >
                 <Formik

@@ -6,12 +6,12 @@ import * as yup from 'yup';
 import { useSnackbar } from 'notistack';
 
 import { Dialog, DialogContent, Box, Button, CircularProgress, Typography, Slide } from '@material-ui/core';
+import LockIcon from '@material-ui/icons/Lock';
 import useStyles from '../../styles/components/auth/signupStyles';
 
 import { closeLoginModal, showSignupModal } from '../../redux/actions/modal/modalActions';
 import { loginUser } from '../../redux/actions/auth/authActions';
 
-import AdventureIcon from '../../assets/adventure.svg';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -63,19 +63,8 @@ const Login = () => {
             aria-labelledby="login-dialog" maxWidth="sm"
             className={classes.dialog}>
 
-            {/* make styles doesn't work, will have to inline styles */}
-            <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-                <img
-                    src={AdventureIcon}
-                    alt="adventure" style={{
-                        maxWidth: '50%',
-                        maxHeight: 200
-
-                    }} />
-            </div>
-
             <Typography className={classes.dialogTitle} variant="h3">
-                Login
+                <LockIcon className={classes.signupIcon} /> <span>Login</span>
             </Typography>
             <DialogContent >
                 <Formik

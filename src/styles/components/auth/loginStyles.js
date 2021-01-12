@@ -20,6 +20,13 @@ export default makeStyles(theme => ({
         textAlign: 'center',
         paddingTop: '0.75rem !important',
         paddingBottom: '0.75rem !important',
+        "& .MuiSvgIcon-root": {
+            fontSize: '6.5rem',
+            textAlign: 'center',
+        },
+        "& span": {
+            display: 'block'
+        }
 
     },
     form: {
