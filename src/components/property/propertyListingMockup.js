@@ -73,7 +73,51 @@ const mockup = [
         numberOfReviews: 4,
         price: '150'
     },
+    {
+        id: 7,
+        title: 'The Madison',
+        sleep: 15,
+        imageUrl: House5,
+        bedroom: 6,
+        bathroom: 3,
+        ratingAverage: 4,
+        numberOfReviews: 95,
+        price: '150'
+    },
+    {
+        id: 8,
+        title: 'Downtown Sleepy Eye',
+        sleep: 1,
+        imageUrl: House6,
+        bedroom: 1,
+        bathroom: 1,
+        ratingAverage: 5,
+        numberOfReviews: 4,
+        price: '150'
+    },
+    {
+        id: 9,
+        title: 'The Madison',
+        sleep: 15,
+        imageUrl: House5,
+        bedroom: 6,
+        bathroom: 3,
+        ratingAverage: 4,
+        numberOfReviews: 95,
+        price: '150'
+    },
+    {
+        id: 10,
+        title: 'Downtown Sleepy Eye',
+        sleep: 1,
+        imageUrl: House6,
+        bedroom: 1,
+        bathroom: 1,
+        ratingAverage: 5,
+        numberOfReviews: 4,
+        price: '150'
+    },
 
-]
+];
 
 export default mockup;

@@ -1,3 +1,43 @@
 * {
   font-family: 'Cabin', sans-serif;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  display: none;
+}
+
+.nextArrowContainer .nextArrow,
+.prevArrowContainer .prevArrow {
+  fill: #fff;
+  padding: 0.25rem;
+  background-color: #132e46;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+}
+
+.nextArrowContainer {
+  right: 10px !important;
+}
+
+.prevArrowContainer {
+  left: 0 !important;
+}
+
+.slick-dots {
+  left: 0;
+}
+
+@media only screen and (max-width: 550px) {
+  .nextArrowContainer .nextArrow,
+  .prevArrowContainer .prevArrow {
+    padding: 0.15rem;
+  }
+}
