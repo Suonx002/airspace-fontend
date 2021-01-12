@@ -1,131 +1,240 @@
-import React, { useState } from 'react'
-import { DatePicker } from '@material-ui/pickers'
+import React from 'react';
 
-import { TextField, Grid, Button, InputAdornment, Typography } from '@material-ui/core'
+
+import { DatePicker } from 'formik-material-ui-pickers';
+import { TextField } from 'formik-material-ui';
+import { Formik, Form, Field } from 'formik';
+import * as yup from 'yup';
+
+import { Grid, Button, Typography } from '@material-ui/core';
+
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import EventIcon from '@material-ui/icons/Event';
-import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import SearchIcon from '@material-ui/icons/Search';
 import PeopleIcon from '@material-ui/icons/People';
 
 
-import useStyles from '../styles/components/jumbotronStyles'
+import useStyles from '../styles/components/jumbotronStyles';
 const Jumbotron = () => {
 
     const classes = useStyles();
-    const [inputFields, setInputFields] = useState({
+
+
+
+    const initialValues = {
         search: '',
-
         guests: '',
-    })
+        arrivalDate: new Date(),
+        departureDate: new Date()
+    };
 
-    const [selectedDate, setSelectedDate] = useState({
-        arrive: new Date(),
-        depart: new Date(),
-    })
+    const jumbotronSchema = yup.object().shape({
+        search: yup.string().required('Search is required'),
+        guests: yup.number().min(1).required('Guest is required'),
+        arrivalDate: yup.date().required('Arrival date is required'),
+        departureDate: yup.date().required('Departure date is required')
+    });
 
-    const { search, guests } = inputFields;
-    const { arrive, depart } = selectedDate;
+    const jumbotronFields = [
+        {
+            label: 'Where',
+            name: 'search',
+            placeholder: 'Search destination',
+            icon: <LocationOnIcon className={classes.adornmentIcon} />,
+            variant: 'outlined',
+            className: 'searchInput',
+            outerClassName: 'searchContainer',
+            color: 'primary',
+            type: 'text',
+            component: TextField
+        },
+        {
+            label: 'Arrival Date',
+            name: 'arrivalDate',
+            variant: 'inline',
+            inputVariant: 'outlined',
+            margin: 'normal',
+            className: 'arriveInput',
+            outerClassName: 'arriveContainer',
+            disableToolbar: true,
+            color: 'primary',
+            component: DatePicker
 
-    const handleFormChange = (e) => {
-        setInputFields({ ...inputFields, [e.target.id]: e.target.value })
-    }
 
-    const handleDateChange = (date, field) => {
-        setSelectedDate({ ...selectedDate, [field]: date })
-    }
+        },
+        {
+            label: 'Departure Date',
+            name: 'departureDate',
+            variant: 'inline',
+            inputVariant: 'outlined',
+            margin: 'normal',
+            className: 'departInput',
+            outerClassName: 'departContainer',
+            disableToolbar: true,
+            color: 'primary',
+            component: DatePicker
 
-    const onFormSubmit = e => {
-        e.preventDefault();
 
+        },
+        {
+            label: 'Guests',
+            name: 'guests',
+            variant: 'outlined',
+            className: 'guestsInput',
+            outerClassName: 'guestsContainer',
+            icon: <PeopleIcon className={classes.adornmentIcon} />,
+            color: 'primary',
+            type: 'number',
+            component: TextField
+
+
+        },
+    ];
+
+
+    const onFormSubmit = (values, { setSubmitting }) => {
+        setSubmitting(false);
         console.log({
-            search, arrive, depart, guests
-        })
-    }
+            values
+        });
+    };
 
 
     return (
         <div className={classes.jumbotron}>
             <Typography variant="h1" className={classes.jumbotronTitle}>Find the perfect vacation rental</Typography>
-            <form autoComplete="off" className={classes.jumbotronForm} onSubmit={onFormSubmit}>
-                <Grid container className={classes.jumbotronGridContainer}>
-                    <Grid item className={classes.searchContainer}>
-                        <TextField
+            <Formik
+                initialValues={initialValues}
+                validationSchema={jumbotronSchema}
+                onSubmit={onFormSubmit}
+            >
 
-                            variant="outlined"
 
-                            className={classes.searchInput}
-                            label="Where"
+                {({ submitForm, isSubmitting }) => (
+                    <Form className={classes.jumbotronForm}>
+                        <Grid container className={classes.jumbotronGridContainer}>
+                            {jumbotronFields.map(field => (
+                                <Grid item className={`${classes[field.outerClassName]}`} key={field.name}>
+                                    <Field
+                                        className={classes[field.className]}
+                                        variant={field.variant}
+                                        inputVariant={field.inputVariant}
+                                        disableToolbar={field.disableToolbar}
+                                        color={field.color}
+                                        component={field.component}
+                                        placeholder={field.placeholder}
+                                        name={field.name}
+                                        type={field.type}
+                                        label={field.label}
+                                        InputProps={field.icon && {
+                                            startAdornment: field.icon
+                                        }}
+                                    />
+                                </Grid>
+                            ))}
 
-                            id="search"
-                            value={search}
-                            onChange={handleFormChange}
-                            InputProps={{
-                                startAdornment: <LocationOnIcon className={classes.adornmentIcon} />
-                            }}
-                            placeholder="Search destination"
 
-                        />
-                    </Grid>
-                    <Grid item className={classes.arriveContainer}>
-                        <DatePicker
-                            className={classes.arriveInput}
+                            <Grid item className={classes.submitContainer}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color='primary'
+                                    className={classes.jumbotronSubmit}
+                                    onClick={submitForm}
+                                >
+                                    <SearchIcon className={classes.searchIcon} /> Search
+                            </Button>
+                            </Grid>
+                        </Grid>
 
-                            disableToolbar
-                            inputVariant="outlined"
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            label="Arrive"
-                            id="arrive"
-                            value={arrive}
-                            onChange={(date) => { handleDateChange(date, 'arrive') }}
-                        />
-                    </Grid>
-                    <Grid item className={classes.departContainer}>
-                        <DatePicker
-                            className={classes.departInput}
-                            disableToolbar
-                            inputVariant="outlined"
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            label="Depart"
-                            id="depart"
-                            value={depart}
-                            onChange={(date) => { handleDateChange(date, 'depart') }}
+                    </Form>
+                )}
+            </Formik>
 
-                        />
-
-                    </Grid>
-                    <Grid item className={classes.guestsContainer}>
-                        <TextField
-                            variant="outlined"
-                            className={classes.guestsInput}
-                            label="Guests"
-                            type="number"
-                            id="guests"
-                            value={guests}
-                            onChange={handleFormChange}
-                            InputProps={{
-                                startAdornment: <PeopleIcon className={classes.adornmentIcon} />
-                            }}
-                        />
-                    </Grid>
-                    <Grid item className={classes.submitContainer}>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color='primary'
-                            className={classes.jumbotronSubmit}>
-                            <SearchIcon className={classes.searchIcon} /> Search
-                        </Button>
-                    </Grid>
-                </Grid>
-
-            </form>
         </div>
-    )
-}
 
-export default Jumbotron
+    );
+    //  (
+    //     <div className={classes.jumbotron}>
+    //         <Typography variant="h1" className={classes.jumbotronTitle}>Find the perfect vacation rental</Typography>
+    //         <form autoComplete="off" className={classes.jumbotronForm} onSubmit={onFormSubmit}>
+    //             <Grid container className={classes.jumbotronGridContainer}>
+    //                 <Grid item className={classes.searchContainer}>
+    //                     <TextField
+
+    //                         variant="outlined"
+
+    //                         className={classes.searchInput}
+    //                         label="Where"
+
+    //                         id="search"
+    //                         value={search}
+    //                         onChange={handleFormChange}
+    //                         InputProps={{
+    //                             startAdornment: <LocationOnIcon className={classes.adornmentIcon} />
+    //                         }}
+    //                         placeholder="Search destination"
+
+    //                     />
+    //                 </Grid>
+    //                 <Grid item className={classes.arriveContainer}>
+    //                     <DatePicker
+    //                         className={classes.arriveInput}
+
+    //                         disableToolbar
+    //                         inputVariant="outlined"
+    //                         variant="inline"
+    //                         format="MM/dd/yyyy"
+    //                         margin="normal"
+    //                         label="Arrive"
+    //                         id="arrive"
+    //                         value={arrive}
+    //                         onChange={(date) => { handleDateChange(date, 'arrive'); }}
+    //                     />
+    //                 </Grid>
+    //                 <Grid item className={classes.departContainer}>
+    //                     <DatePicker
+    //                         className={classes.departInput}
+    //                         disableToolbar
+    //                         inputVariant="outlined"
+    //                         variant="inline"
+    //                         format="MM/dd/yyyy"
+    //                         margin="normal"
+    //                         label="Depart"
+    //                         id="depart"
+    //                         value={depart}
+    //                         onChange={(date) => { handleDateChange(date, 'depart'); }}
+
+    //                     />
+
+    //                 </Grid>
+    //                 <Grid item className={classes.guestsContainer}>
+    //                     <TextField
+    //                         variant="outlined"
+    //                         className={classes.guestsInput}
+    //                         label="Guests"
+    //                         type="number"
+    //                         id="guests"
+    //                         value={guests}
+    //                         onChange={handleFormChange}
+    //                         InputProps={{
+    //                             startAdornment: <PeopleIcon className={classes.adornmentIcon} />
+    //                         }}
+    //                     />
+    //                 </Grid>
+    //                 <Grid item className={classes.submitContainer}>
+    //                     <Button
+    //                         type="submit"
+    //                         variant="contained"
+    //                         color='primary'
+    //                         className={classes.jumbotronSubmit}>
+    //                         <SearchIcon className={classes.searchIcon} /> Search
+    //                     </Button>
+    //                 </Grid>
+    //             </Grid>
+
+    //         </form>
+    //     </div>
+    // );
+};
+
+export default Jumbotron;
