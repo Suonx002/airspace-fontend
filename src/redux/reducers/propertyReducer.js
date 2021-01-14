@@ -1,9 +1,10 @@
-import * as property from '../actions/property/propertyTypes';
+import * as types from '../actions/property/propertyTypes';
 
 
 const initialState = {
-    property: null,
+    homepageProperties: {},
     allProperties: [],
+    property: null,
     currentProperty: null,
     isLoading: true,
     error: null
@@ -11,6 +12,24 @@ const initialState = {
 
 const propertyReducer = (state = initialState, action) => {
     switch (action.type) {
+        case types.GET_HOMEPAGE_PROPERTIES:
+            return { ...state, homepageProperties: action.payload, isLoading: false, error: null };
+        case types.GET_ALL_PROPERTIES:
+            return { ...state, allProperties: action.payload, isLoading: false, error: null };
+        case types.GET_SINGLE_PROPERTY:
+            return { ...state, property: action.payload, isLoading: false, error: null };
+        case types.GET_CURRENT_PROPERTY:
+            return { ...state, currentProperty: action.payload, isLoading: false, error: null };
+        case types.CREATE_PROPERTY:
+            return { ...state, allProperties: [action.payload, ...state.allProperties], isLoading: false, error: null };
+        case types.UPDATE_PROPERTY:
+            return { ...state, allProperties: state.allProperties.map(property => property.propertyId === action.payload.propertyId ? action.payload : property), isLoading: false, error: null };
+        case types.DELETE_PROPERTY:
+            return { ...state, allProperties: state.allProperties.filter(property => property.propertyId !== action.payload), isLoading: false, error: null };
+        case types.CLEAR_CURRENT_PROPERTY:
+            return { ...state, currentProperty: null, isLoading: false, error: null };
+        case types.PROPERTY_ERROR:
+            return { ...state, error: action.payload, isLoading: false };
         default:
             return state;
     }

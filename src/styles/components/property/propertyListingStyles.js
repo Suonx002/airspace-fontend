@@ -14,7 +14,6 @@ export default makeStyles(theme => ({
         }
     },
     listingTitle: {
-        // textTransform: 'uppercase',
         padding: '1rem',
         fontWeight: 600,
         color: theme.palette.secondary.main,

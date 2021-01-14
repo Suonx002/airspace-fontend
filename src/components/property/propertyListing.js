@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from "react-slick";
 
 
-import { Grid, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import useStyles from '../../styles/components/property/propertyListingStyles';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';

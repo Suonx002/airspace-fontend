@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as auth from './authTypes';
+import * as types from './authTypes';
 
 import setAuthToken from '../../../utils/setAuthToken';
 import { closeLoginModal, closeSignupModal } from '../modal/modalActions';
@@ -10,13 +10,13 @@ export const getAuthUser = () => async dispatch => {
         const res = await axios.get('/api/v1/users/me');
 
         dispatch({
-            type: auth.GET_AUTH_USER,
+            type: types.GET_AUTH_USER,
             payload: res.data.data
         });
 
     } catch (err) {
         dispatch({
-            type: auth.AUTH_ERROR,
+            type: types.AUTH_ERROR,
             payload: err.response.data.message
         });
     }
@@ -27,7 +27,7 @@ export const signupUser = (data, enqueueSnackbar, setSubmitting) => async dispat
         const res = await axios.post('/api/v1/auth/signup', data);
 
         dispatch({
-            type: auth.SIGNUP_SUCCESS,
+            type: types.SIGNUP_SUCCESS,
             payload: res.data
         });
 
@@ -39,7 +39,7 @@ export const signupUser = (data, enqueueSnackbar, setSubmitting) => async dispat
 
     } catch (err) {
         dispatch({
-            type: auth.AUTH_ERROR,
+            type: types.AUTH_ERROR,
             payload: err.response.data.message
         });
 
@@ -55,7 +55,7 @@ export const loginUser = (data, enqueueSnackbar, setSubmitting) => async dispatc
         const res = await axios.post('/api/v1/auth/login', data);
 
         dispatch({
-            type: auth.LOGIN_SUCCESS,
+            type: types.LOGIN_SUCCESS,
             payload: res.data
         });
 
@@ -68,7 +68,7 @@ export const loginUser = (data, enqueueSnackbar, setSubmitting) => async dispatc
     } catch (err) {
 
         dispatch({
-            type: auth.AUTH_ERROR,
+            type: types.AUTH_ERROR,
             payload: err.response.data.message
         });
 
@@ -82,7 +82,7 @@ export const loginUser = (data, enqueueSnackbar, setSubmitting) => async dispatc
 
 export const logoutUser = (enqueueSnackbar) => dispatch => {
     dispatch({
-        type: auth.LOGOUT_USER
+        type: types.LOGOUT_USER
     });
     enqueueSnackbar('Successfully logout!', {
         variant: 'success'
@@ -93,6 +93,6 @@ export const logoutUser = (enqueueSnackbar) => dispatch => {
 
 export const clearAuthError = () => dispatch => {
     dispatch({
-        type: auth.CLEAR_AUTH_ERROR
+        type: types.CLEAR_AUTH_ERROR
     });
 };
