@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 
 
@@ -6,35 +7,40 @@ import useStyles from '../../styles/components/property/propertyCardStyles';
 const PropertyCard = (props) => {
 
     const { property } = props;
-    const { id,
+
+    console.log({ property });
+    const {
         title,
-        sleep,
-        imageUrl,
-        bedroom,
-        bathroom,
-        ratingAverage,
-        numberOfReviews,
-        price } = property;
+        bathrooms,
+        bedrooms,
+        city,
+        guests,
+        id,
+        price,
+        propertyImage,
+        propertyReviews,
+        slug,
+        state,
+    } = property;
 
     const classes = useStyles();
     return (
         <div className={classes.property}>
             <div className={classes.propertyContent}>
-                <img src={imageUrl} alt={title} className={classes.propertyImg} />
-                <h4 className={classes.propertyTitle}>
+                <img src={propertyImage} alt={title} className={classes.propertyImg} />
+                <Typography variant="h4" className={classes.propertyTitle}>
                     {title}
-                </h4>
-                <p className={classes.propertySleep}>
-                    Sleeps <span className={classes.sleep}>{sleep}</span> <span className={classes.bedroom}>{bedroom}</span> BR <span className={classes.bathroom}>{bathroom}</span> BA
-                </p>
-                <p className={classes.propertyStars}>
-                    <span className={classes.propertyStar}>*</span>
-                    <span className={classes.propertyStar}>*</span>
-                    <span className={classes.propertyStar}>*</span>
-                    <span className={classes.propertyStar}>*</span>
-                    <span className={classes.propertyStar}>*</span>
-                </p>
-                <p className={classes.propertyPrice}>${price} avg/night</p>
+                </Typography>
+                <Typography variant="h5" className={classes.propertySubtitle}>
+                    {city}, {state}
+                </Typography>
+                <Typography variant="body1" className={classes.propertySleep}>
+                    Sleeps <span className={classes.sleep}>{guests}  </span>  <span className={classes.bedroom}>{bedrooms}  </span> BR <span className={classes.bathroom}>{bathrooms}</span> BA
+                </Typography>
+                <Typography variant="body1" className={classes.propertyStars}>
+                    {propertyReviews.length === 0 ? 0 : propertyReviews.length} {propertyReviews.length > 1 ? 'Reviews' : 'Review'}
+                </Typography>
+                <Typography variant="body1" className={classes.propertyPrice}>${price} avg/night</Typography>
             </div>
         </div>
     );
