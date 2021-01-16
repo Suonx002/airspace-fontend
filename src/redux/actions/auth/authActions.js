@@ -4,7 +4,10 @@ import * as types from './authTypes';
 import setAuthToken from '../../../utils/setAuthToken';
 import { closeLoginModal, closeSignupModal } from '../modal/modalActions';
 
-export const getAuthUser = () => async dispatch => {
+import handleTokenError from '../../../utils/methods/handleTokenError';
+
+
+export const getAuthUser = (enqueueSnackbar) => async dispatch => {
     try {
         setAuthToken(localStorage.jwtToken);
         const res = await axios.get('/api/v1/users/me');
@@ -15,9 +18,10 @@ export const getAuthUser = () => async dispatch => {
         });
 
     } catch (err) {
+
+        handleTokenError(err, enqueueSnackbar);
         dispatch({
             type: types.AUTH_ERROR,
-            payload: err.response.data.message
         });
     }
 };
@@ -38,9 +42,11 @@ export const signupUser = (data, enqueueSnackbar, setSubmitting) => async dispat
         });
 
     } catch (err) {
+
+        handleTokenError(err, enqueueSnackbar);
+
         dispatch({
             type: types.AUTH_ERROR,
-            payload: err.response.data.message
         });
 
         setSubmitting(false);
@@ -53,6 +59,8 @@ export const signupUser = (data, enqueueSnackbar, setSubmitting) => async dispat
 export const loginUser = (data, enqueueSnackbar, setSubmitting) => async dispatch => {
     try {
         const res = await axios.post('/api/v1/auth/login', data);
+
+        console.log({ res });
 
         dispatch({
             type: types.LOGIN_SUCCESS,
@@ -67,9 +75,11 @@ export const loginUser = (data, enqueueSnackbar, setSubmitting) => async dispatc
 
     } catch (err) {
 
+        console.log({ err });
+        handleTokenError(err, enqueueSnackbar);
         dispatch({
             type: types.AUTH_ERROR,
-            payload: err.response.data.message
+
         });
 
         setSubmitting(false);

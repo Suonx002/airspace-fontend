@@ -2,6 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
 
+    // '@keyframes fadeIn': {
+    //     from: { opacity: 0 },
+    //     to: { opacity: 1 }
+    // },
     profileMenu: {
         marginTop: 55
     },
@@ -32,4 +36,39 @@ export default makeStyles(theme => ({
             backgroundColor: theme.palette.primary.dark
         }
     },
+    avatarContainer: {
+        cursor: 'pointer',
+        "&:hover": {
+            backgroundColor: 'transparent'
+        }
+
+    },
+    avatarContent: {
+        display: 'flex',
+        alignItems: 'center',
+        "& > *": {
+            paddingLeft: '0.35rem',
+            paddingRight: '0.35rem',
+        }
+    },
+    avatar: {
+        width: 40,
+        height: 40,
+        objectFit: 'cover',
+        objectPosition: 'top'
+    },
+    profileName: {
+        color: theme.palette.secondary.main
+    },
+    profileArrow: {
+        color: theme.palette.secondary.main,
+    },
+    propertyBtnContainer: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+        "&:hover": {
+            backgroundColor: theme.palette.primary.dark
+        }
+
+    }
 }));

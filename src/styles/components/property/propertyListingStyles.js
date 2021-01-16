@@ -5,6 +5,9 @@ export default makeStyles(theme => ({
         padding: '2rem 0',
         "&:nth-child(odd)": {
             backgroundColor: theme.palette.common.lighterColor
+        },
+        [theme.breakpoints.down(550)]: {
+            padding: 0
         }
     },
     listingGridContainer: {
@@ -19,6 +22,7 @@ export default makeStyles(theme => ({
         color: theme.palette.secondary.main,
         position: 'relative',
         display: 'inline-block',
+        textTransform: 'uppercase',
         "&:after": {
             content: '""',
             display: 'block',
@@ -30,12 +34,16 @@ export default makeStyles(theme => ({
             transform: 'translateX(-50%)',
             bottom: 0
 
+        },
+        [theme.breakpoints.down(550)]: {
+            display: 'block',
+            textAlign: 'center'
         }
     },
     sliders: {
         padding: '0 2rem !important',
         [theme.breakpoints.down(550)]: {
-            padding: '2rem 1.5rem !important',
+            padding: '1.5rem 1.5rem !important',
         },
     },
 

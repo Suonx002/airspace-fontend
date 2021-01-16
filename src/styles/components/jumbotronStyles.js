@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
-import LandingJumbo from '../../assets/landing-jumbo.jpg'
+import LandingJumbo from '../../assets/landing-jumbo.jpg';
 
 export default makeStyles(theme => ({
 
@@ -9,13 +9,18 @@ export default makeStyles(theme => ({
             rgba(0, 0, 0, 0.75), 
             rgba(0, 0, 0, 0.75)
           ),url(${LandingJumbo}) no-repeat center center/cover`,
-        minHeight: '50vh',
+        height: '65vh',
+        minHeight: 550,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: '2rem',
         paddingBottom: '2rem',
+        [theme.breakpoints.down(550)]: {
+            height: '85vh',
+            minHeight: 300,
+        }
     },
     jumbotronTitle: {
         color: theme.palette.common.white,
@@ -219,4 +224,4 @@ export default makeStyles(theme => ({
         paddingRight: '0.2rem'
     }
 
-}))
+}));

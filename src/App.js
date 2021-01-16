@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useSnackbar } from 'notistack';
 
 import useStyles from './styles/appStyles';
 
@@ -38,11 +39,13 @@ const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   useEffect(() => {
 
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
-      dispatch(getAuthUser());
+      dispatch(getAuthUser(enqueueSnackbar));
     }
 
     //eslint-disable-next-line

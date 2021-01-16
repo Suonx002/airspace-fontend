@@ -8,7 +8,6 @@ const PropertyCard = (props) => {
 
     const { property } = props;
 
-    console.log({ property });
     const {
         title,
         bathrooms,
@@ -35,7 +34,7 @@ const PropertyCard = (props) => {
                     {city}, {state}
                 </Typography>
                 <Typography variant="body1" className={classes.propertySleep}>
-                    Sleeps <span className={classes.sleep}>{guests}  </span>  <span className={classes.bedroom}>{bedrooms}  </span> BR <span className={classes.bathroom}>{bathrooms}</span> BA
+                    Sleeps <span className={classes.sleep}>{guests} ·</span>  <span className={classes.bedroom}>{bedrooms} </span> BR ·<span className={classes.bathroom}>{bathrooms}</span> BA
                 </Typography>
                 <Typography variant="body1" className={classes.propertyStars}>
                     {propertyReviews.length === 0 ? 0 : propertyReviews.length} {propertyReviews.length > 1 ? 'Reviews' : 'Review'}

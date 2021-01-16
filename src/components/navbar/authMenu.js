@@ -4,11 +4,16 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 
-import { Typography, Button, IconButton, Menu, MenuItem, Avatar } from '@material-ui/core';
+import { Typography, Button, IconButton, Menu, MenuItem, Avatar, Tooltip } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import AddIcon from '@material-ui/icons/Add';
 
 import useStyles from '../../styles/components/navbar/authMenuStyles';
 
 import { logoutUser } from '../../redux/actions/auth/authActions';
+
+import capitalizeString from '../../utils/methods/capitalizeString';
 
 const AuthMenu = () => {
 
@@ -22,21 +27,43 @@ const AuthMenu = () => {
     const handleAvatarAnchorClick = e => setAvatarAnchor(e.currentTarget);
     const handleAvatarAnchorClose = () => setAvatarAnchor(null);
 
-    return (
+    const [isMenuClicked, setIsMenuClicked] = useState(false);
+
+    const handleViewProfileClicked = (e) => {
+        handleAvatarAnchorClick(e);
+        //change arrow state to ExpandMoreIcon
+        setIsMenuClicked(true);
+    };
+    return user ? (
         <>
-            {/* become a hose */}
-            {user && user.role === 'user' && <Button component={Link} to={'/become-a-host'} className={classes.hostBtn}>Become a host</Button>}
+            {/* become a host */}
+            { user.role === 'user' && <Button component={Link} to={'/become-a-host'} className={classes.hostBtn}>Become a host</Button>}
+
+            {/* create property as host */}
+            { user.role === 'host' && <IconButton onClick={() => { console.log('yay'); }} variant="contained" color='primary' className={classes.propertyBtnContainer}>
+                <Tooltip title="Create Property">
+                    <AddIcon classname={classes.propertyBtn} />
+                </Tooltip>
+            </IconButton>}
 
             {/* profile avatar */}
-            <IconButton onClick={handleAvatarAnchorClick} aria-controls="profile-menu" aria-haspopup="true" className={classes.avatarContainer}>
-                <Avatar src="https://res.cloudinary.com/airspacerental/image/upload/v1609567013/airspace/properties/property_default.png" className={classes.avatar} />
-            </IconButton>
+            <IconButton onClick={handleViewProfileClicked} aria-controls="profile-menu" aria-haspopup="true" className={classes.avatarContainer} disableRipple>
+                <div className={classes.avatarContent}>
+                    <Avatar src={user.profileImage ? user.profileImage : ''} className={classes.avatar} />
+                    <Typography variant="body1" className={classes.profileName}>{`${capitalizeString(user.firstName)} ${capitalizeString(user.lastName)}`}</Typography>
+                    <Typography variant="body1" className={classes.profileArrow}>{isMenuClicked ? <ExpandLessIcon /> : < ExpandMoreIcon />}</Typography>
+                </div>
+            </IconButton >
             <Menu
                 id="profile-menu"
                 anchorEl={avatarAnchor}
                 keepMounted
                 open={Boolean(avatarAnchor)}
-                onClose={handleAvatarAnchorClose}
+                onClose={() => {
+                    handleAvatarAnchorClose();
+                    //change arrows state to ExpandLessIcon
+                    setIsMenuClicked(false);
+                }}
                 className={classes.profileMenu}
             >
                 <MenuItem onClick={handleAvatarAnchorClose} className={classes.profileMenuItem}>
@@ -55,7 +82,7 @@ const AuthMenu = () => {
                 </MenuItem>
             </Menu>
         </>
-    );
+    ) : null;
 };
 
 export default AuthMenu;

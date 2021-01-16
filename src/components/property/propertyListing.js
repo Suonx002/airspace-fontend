@@ -56,50 +56,45 @@ const PropertyListing = (props) => {
         dots: true,
         autoplay: true,
         autoplaySpeed: 3000,
-        slidesToShow: 8,
+        slidesToShow: 6,
         slidesToScroll: 1,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
         responsive: [
-            {
-                breakpoint: 1700,
-                settings: {
-                    slidesToShow: 7,
-                    slidesToScroll: 1,
-                }
-            },
+
             {
                 breakpoint: 1500,
-                settings: {
-                    slidesToShow: 6,
-                    slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 1280,
                 settings: {
                     slidesToShow: 5,
                     slidesToScroll: 1,
                 }
             },
             {
-                breakpoint: 992,
+                breakpoint: 1280,
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 1,
                 }
             },
             {
-                breakpoint: 768,
+                breakpoint: 992,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
                 }
             },
             {
-                breakpoint: 550,
+                breakpoint: 768,
                 settings: {
                     slidesToShow: 2,
+                    slidesToScroll: 1,
+                    dots: 'none'
+                }
+            },
+            {
+                breakpoint: 550,
+                settings: {
+                    slidesToShow: 1,
                     slidesToScroll: 1,
                     dots: 'none'
                 }
