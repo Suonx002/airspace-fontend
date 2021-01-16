@@ -28,3 +28,14 @@ export const closeLoginModal = () => dispatch => {
         type: types.CLOSE_LOGIN_MODAL
     });
 };
+
+export const showPropertyFormModal = () => dispatch => {
+    dispatch({
+        type: types.SHOW_PROPERTY_FORM_MODAL
+    });
+};
+export const closePropertyFormModal = () => dispatch => {
+    dispatch({
+        type: types.CLOSE_PROPERTY_FORM_MODAL
+    });
+};

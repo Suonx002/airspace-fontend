@@ -15,6 +15,10 @@ import { logoutUser } from '../../redux/actions/auth/authActions';
 
 import capitalizeString from '../../utils/methods/capitalizeString';
 
+
+import * as modalActions from '../../redux/actions/modal/modalActions';
+import PropertyForm from '../property/propertyForm';
+
 const AuthMenu = () => {
 
     const classes = useStyles();
@@ -40,11 +44,20 @@ const AuthMenu = () => {
             { user.role === 'user' && <Button component={Link} to={'/become-a-host'} className={classes.hostBtn}>Become a host</Button>}
 
             {/* create property as host */}
-            { user.role === 'host' && <IconButton onClick={() => { console.log('yay'); }} variant="contained" color='primary' className={classes.propertyBtnContainer}>
-                <Tooltip title="Create Property">
-                    <AddIcon classname={classes.propertyBtn} />
-                </Tooltip>
-            </IconButton>}
+            { user.role === 'host' &&
+                <>
+                    <PropertyForm />
+                    <IconButton
+                        onClick={() => { dispatch(modalActions.showPropertyFormModal()); }}
+                        variant="contained"
+                        color='primary'
+                        className={classes.propertyBtnContainer}>
+                        <Tooltip title="Create Property">
+                            <AddIcon classname={classes.propertyBtn} />
+                        </Tooltip>
+                    </IconButton>
+                </>
+            }
 
             {/* profile avatar */}
             <IconButton onClick={handleViewProfileClicked} aria-controls="profile-menu" aria-haspopup="true" className={classes.avatarContainer} disableRipple>
