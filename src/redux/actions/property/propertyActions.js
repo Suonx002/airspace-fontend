@@ -4,6 +4,8 @@ import * as types from './propertyTypes';
 import handleTokenError from '../../../utils/methods/handleTokenError';
 
 
+import * as modalActions from '../modal/modalActions';
+
 export const getHomepageProperties = (enqueueSnackbar) => async dispatch => {
     try {
         const res = await axios.get(`/api/v1/properties/homepage`);
@@ -62,18 +64,34 @@ export const getSingleProperty = (propertyId, enqueueSnackbar) => async dispatch
 
 
 
-export const createProperty = (data, enqueueSnackbar) => async dispatch => {
+export const createProperty = (data, enqueueSnackbar, setSubmitting) => async dispatch => {
     try {
-        const res = await axios.post(`/api/v1/properties`, data);
+        const formData = new FormData();
+
+        for (let key in data) {
+            formData.append(key, data[key]);
+        }
+
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+
+        const res = await axios.post(`/api/v1/properties`, formData, config);
 
         dispatch({
             type: types.CREATE_PROPERTY,
             payload: res.data.data
         });
 
+        dispatch(modalActions.closePropertyFormModal());
+
         enqueueSnackbar('Successfully created a new property!', {
             variant: 'success'
         });
+
+        setSubmitting(false);
 
     } catch (err) {
         handleTokenError(err, enqueueSnackbar);
@@ -86,6 +104,11 @@ export const createProperty = (data, enqueueSnackbar) => async dispatch => {
         enqueueSnackbar('Something went wrong with creating a property!', {
             variant: 'error'
         });
+        setSubmitting(false);
+
+        dispatch(modalActions.showPropertyFormModal());
+
+
 
     }
 };

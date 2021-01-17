@@ -25,6 +25,7 @@ export default makeStyles(theme => ({
         objectFit: 'cover',
         objectPosition: 'center',
         marginBottom: '0.5rem',
+        borderBottom: `1px solid ${theme.palette.secondary.main}`,
         [theme.breakpoints.down(550)]: {
             height: 225,
 

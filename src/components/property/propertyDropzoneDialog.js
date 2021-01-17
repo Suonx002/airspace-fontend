@@ -13,6 +13,7 @@ const PropertyDropzone = () => {
 
     return (
         <DropzoneDialog
+            className='TESTIN-1233'
             acceptedFiles={['image/*']}
             cancelButtonText={"cancel"}
             submitButtonText={"submit"}
@@ -21,7 +22,7 @@ const PropertyDropzone = () => {
             onClose={() => { dispatch(modalActions.closePropertyDropzone()); }}
             onSave={(files) => {
                 console.log('Files:', files);
-                dispatch(imageFileActions.setPropertyFileUpload(files));
+                dispatch(imageFileActions.setPropertyFileUpload(files[0]));
                 dispatch(modalActions.closePropertyDropzone());
             }}
             showPreviews={true}

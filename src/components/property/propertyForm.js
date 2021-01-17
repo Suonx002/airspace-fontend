@@ -9,6 +9,7 @@ import { Typography, Dialog, DialogContent, Slide, Box, CircularProgress, Button
 import useStyles from '../../styles/components/property/propertyFormStyles';
 
 import * as modalActions from '../../redux/actions/modal/modalActions';
+import * as propertyActions from '../../redux/actions/property/propertyActions';
 
 import PropertyDropzoneDialog from './propertyDropzoneDialog';
 
@@ -59,9 +60,12 @@ const PropertyForm = () => {
             enqueueSnackbar('Please upload an image for property!', {
                 variant: 'error',
             });
-            // setSubmitting(false);
+            setSubmitting(false);
             return;
         }
+
+        // create property
+        dispatch(propertyActions.createProperty({ ...values, propertyImage: propertyUploadFile }, enqueueSnackbar, setSubmitting));
 
 
     };
@@ -183,7 +187,7 @@ const PropertyForm = () => {
                                 </div>
 
                                 <Box className={classes.fileBtnContainer}>
-                                    <Button variant="outlined" color="primary" className={classes.fileBtn} >Upload Image</Button>
+                                    <Button variant="outlined" color="primary" className={classes.fileBtn} onClick={() => { dispatch(modalActions.showPropertyDropzone()); }}>Upload Image</Button>
                                 </Box>
 
                                 <Box className={classes.btnActions}>
