@@ -39,3 +39,15 @@ export const closePropertyFormModal = () => dispatch => {
         type: types.CLOSE_PROPERTY_FORM_MODAL
     });
 };
+
+export const showPropertyDropzone = () => dispatch => {
+    dispatch({
+        type: types.SHOW_PROPERTY_DROPZONE_MODAL
+    });
+};
+
+export const closePropertyDropzone = () => dispatch => {
+    dispatch({
+        type: types.CLOSE_PROPERTY_DROPZONE_MODAL
+    });
+};

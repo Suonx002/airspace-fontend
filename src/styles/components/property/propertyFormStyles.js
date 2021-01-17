@@ -38,6 +38,24 @@ export default makeStyles(theme => ({
             flexBasis: '50%',
         }
     },
+    fileBtnContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        margin: 0
+    },
+    fileBtn: {
+        flexBasis: '31.5%',
+        fontSize: '1rem',
+        textTransform: 'capitalize',
+        [theme.breakpoints.down(538)]: {
+            fontSize: '0.9rem'
+        },
+        [theme.breakpoints.down(500)]: {
+            flexBasis: '47.5%',
+        }
+
+    },
     btnActions: {
         display: 'flex',
         justifyContent: 'flex-end',
@@ -46,6 +64,10 @@ export default makeStyles(theme => ({
             marginLeft: '0.25rem',
             marginRight: '0.25rem',
         }
+    },
+    loadingSpinner: {
+        width: '24px !important',
+        height: '24px !important',
     }
 
 }));

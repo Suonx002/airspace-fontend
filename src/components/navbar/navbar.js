@@ -33,7 +33,6 @@ const Navbar = () => {
                         <div className={classes.desktopMenu}>
                             {isAuthenticated ? <AuthMenu /> : <PublicMenu />}
                         </div>
-
                         {/* mobile menu */}
                         <IconButton className={classes.menuIconContainer}>
                             <MenuIcon className={classes.menuIcon} />

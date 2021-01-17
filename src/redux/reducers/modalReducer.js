@@ -3,7 +3,8 @@ import * as types from '../actions/modal/modalTypes';
 const initialState = {
     signupModal: false,
     loginModal: false,
-    propertyFormModal: false
+    propertyFormModal: false,
+    propertyDropzoneModal: false
 };
 
 
@@ -21,6 +22,10 @@ const modalReducer = (state = initialState, action) => {
             return { ...state, propertyFormModal: true };
         case types.CLOSE_PROPERTY_FORM_MODAL:
             return { ...state, propertyFormModal: false };
+        case types.SHOW_PROPERTY_DROPZONE_MODAL:
+            return { ...state, propertyDropzoneModal: true };
+        case types.CLOSE_PROPERTY_DROPZONE_MODAL:
+            return { ...state, propertyDropzoneModal: false };
         default:
             return state;
     }

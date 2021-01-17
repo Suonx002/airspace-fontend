@@ -10,6 +10,8 @@ import useStyles from '../../styles/components/property/propertyFormStyles';
 
 import * as modalActions from '../../redux/actions/modal/modalActions';
 
+import PropertyDropzoneDialog from './propertyDropzoneDialog';
+
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -20,8 +22,9 @@ const PropertyForm = () => {
 
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
+
     const dispatch = useDispatch();
-    const { modal: { propertyFormModal } } = useSelector(state => state);
+    const { modal: { propertyFormModal }, imageFile: { propertyUploadFile } } = useSelector(state => state);
 
     const initialValues = {
         title: '',
@@ -51,7 +54,16 @@ const PropertyForm = () => {
 
 
     const onFormSubmit = (values, { setSubmitting }) => {
-        console.log({ values });
+
+        if (!propertyUploadFile) {
+            enqueueSnackbar('Please upload an image for property!', {
+                variant: 'error',
+            });
+            // setSubmitting(false);
+            return;
+        }
+
+
     };
 
     const fullWidthFields = [
@@ -76,9 +88,6 @@ const PropertyForm = () => {
             variant: 'outlined',
             type: 'text'
         },
-    ];
-
-    const thirdWidthFields = [
         {
             label: 'City',
             name: 'city',
@@ -86,6 +95,10 @@ const PropertyForm = () => {
             variant: 'outlined',
             type: 'text'
         },
+    ];
+
+    const thirdWidthFields = [
+
         {
             label: 'State',
             name: 'state',
@@ -131,55 +144,64 @@ const PropertyForm = () => {
     ];
 
     return (
-        <Dialog
-            open={propertyFormModal}
-            onClose={() => { dispatch(modalActions.closePropertyFormModal()); }}
-            TransitionComponent={Transition}
-            aria-labelledby="property-form-dialog" maxWidth="sm"
-            className={classes.dialog}
-        >
-            <DialogContent>
-                <Typography variant="h3" className={classes.title}> Create Property</Typography>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={propertySchema}
-                    onSubmit={onFormSubmit}
-                >
-                    {({ submitForm, isSubmitting }) => (
-                        <Form className={classes.form}>
-                            <div className={classes.formContent}>
+        <>
+            <PropertyDropzoneDialog />
+            <Dialog
+                open={propertyFormModal}
+                onClose={() => { dispatch(modalActions.closePropertyFormModal()); }}
+                TransitionComponent={Transition}
+                aria-labelledby="property-form-dialog" maxWidth="sm"
+                className={classes.dialog}
+            >
+                <DialogContent>
+                    <Typography variant="h3" className={classes.title}> Create Property</Typography>
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={propertySchema}
+                        onSubmit={onFormSubmit}
+                    >
+                        {({ submitForm, isSubmitting }) => (
+                            <Form className={classes.form}>
+                                <div className={classes.formContent}>
 
-                                {/* full width fields */}
-                                {fullWidthFields.map(field => (
-                                    <Box key={field.name} className={classes.fullWidthField}>
-                                        <Field type={field.type} component={field.component} label={field.label} name={field.name} variant={field.variant} />
-                                    </Box>
-                                ))}
+                                    {/* full width fields */}
+                                    {fullWidthFields.map(field => (
+                                        <Box key={field.name} className={classes.fullWidthField}>
+                                            <Field type={field.type} component={field.component} label={field.label} name={field.name} variant={field.variant} />
+                                        </Box>
+                                    ))}
 
-                                {/* third width fields */}
+                                    {/* third width fields */}
 
-                                {thirdWidthFields.map(field => (
-                                    <Box key={field.name} className={classes.thirdWidthField}>
-                                        <Field type={field.type} component={field.component} label={field.label} name={field.name} variant={field.variant} />
-                                    </Box>
-                                ))}
-                            </div>
+                                    {thirdWidthFields.map(field => (
+                                        <Box key={field.name} className={classes.thirdWidthField}>
+                                            <Field type={field.type} component={field.component} label={field.label} name={field.name} variant={field.variant} />
+                                        </Box>
+                                    ))}
 
-                            <Box className={classes.btnActions}>
-                                <Button variant="outlined" onClick={() => dispatch(modalActions.closePropertyFormModal())} className={classes.cancelBtn}>
-                                    Cancel
+
+                                </div>
+
+                                <Box className={classes.fileBtnContainer}>
+                                    <Button variant="outlined" color="primary" className={classes.fileBtn} >Upload Image</Button>
+                                </Box>
+
+                                <Box className={classes.btnActions}>
+                                    <Button variant="outlined" onClick={() => dispatch(modalActions.closePropertyFormModal())} className={classes.cancelBtn}>
+                                        Cancel
                                 </Button>
-                                <Button variant="contained" color="primary" disabled={isSubmitting} onClick={submitForm} className={classes.submitBtn}>
-                                    {isSubmitting ? <CircularProgress className={classes.loadingSpinner} /> : 'Submit'}
-                                </Button>
+                                    <Button variant="contained" color="primary" disabled={isSubmitting} onClick={submitForm} className={classes.submitBtn}>
+                                        {isSubmitting ? <CircularProgress className={classes.loadingSpinner} /> : 'Submit'}
+                                    </Button>
 
-                            </Box>
-                        </Form>
-                    )}
-                </Formik>
-            </DialogContent>
+                                </Box>
+                            </Form>
+                        )}
+                    </Formik>
+                </DialogContent>
 
-        </Dialog>
+            </Dialog>
+        </>
     );
 };
 
