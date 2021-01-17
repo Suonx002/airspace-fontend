@@ -2,7 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
     appbar: {
-        backgroundColor: theme.palette.common.white
+        backgroundColor: theme.palette.common.white,
+        borderBottom: `2px solid ${theme.palette.common.lighterColor}`
     },
     toolbar: {
         display: 'flex',
