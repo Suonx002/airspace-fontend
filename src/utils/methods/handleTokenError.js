@@ -1,6 +1,6 @@
 const handleTokenError = (err, enqueueSnackbar) => {
 
-    if (err.response && err.response.data && err.response.data.message.includes('token')) {
+    if (err.response && err.response.data && err.response.data.message && err.response.data.message.includes('token')) {
         enqueueSnackbar(err.response.data.message || 'Please login again', {
             variant: 'error'
         });

@@ -2,6 +2,11 @@
   font-family: 'Cabin', sans-serif;
 }
 
+html,
+body {
+  box-sizing: border-box !important;
+}
+
 body {
   overflow-x: hidden;
 }
