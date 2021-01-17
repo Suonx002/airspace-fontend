@@ -7,12 +7,14 @@ import useStyles from './styles/appStyles';
 
 import PrivateRoute from './utils/PrivateRoute';
 
+import Navbar from './components/navbar/navbar';
+
 // Public Routes
 import Homepage from './pages/homepage';
+import PropertyDetail from './components/property/propertyDetail';
 
 // Private Routes
 import PropertyForm from './components/property/propertyForm';
-import Navbar from './components/navbar/navbar';
 
 import { getAuthUser } from './redux/actions/auth/authActions';
 import setAuthToken from './utils/setAuthToken';
@@ -22,14 +24,20 @@ const publicRoutes = [
   {
     component: Homepage,
     to: "/"
-  }
+  },
+  {
+    component: PropertyDetail,
+    to: "/properties/:propertyId"
+  },
 ];
 
 const privateRoutes = [
   {
     component: PropertyForm,
     to: "/properties/create"
-  }
+  },
+
+
 ];
 
 

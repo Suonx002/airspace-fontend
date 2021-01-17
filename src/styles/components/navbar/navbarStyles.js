@@ -13,7 +13,8 @@ export default makeStyles(theme => ({
 
     },
     toolbarMargin: {
-        ...theme.mixins.toolbar
+        ...theme.mixins.toolbar,
+        marginBottom: '1.25rem'
     },
     logoContainer: {
         padding: 0,

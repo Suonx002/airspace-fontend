@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles(theme => ({
     property: {
         padding: '0.75rem',
+
         "& div": {
             display: 'flex',
             flexDirection: 'column',
@@ -18,6 +19,17 @@ export default makeStyles(theme => ({
             padding: '1.25rem',
 
         }
+    },
+    propertyLink: {
+        display: 'inline-block',
+        height: '100%',
+        width: '100%',
+        textDecoration: 'none',
+        transition: 'all 0.15s ease-in-out',
+        "&:hover": {
+            boxShadow: `0 0 8px 1px rgba(19, 46, 70, 0.3)`
+        },
+
     },
     propertyImg: {
         width: '100%',
