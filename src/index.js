@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { SnackbarProvider } from 'notistack';
 
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 import { ThemeProvider } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from "@date-io/date-fns";
@@ -23,6 +25,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <SnackbarProvider
           autoHideDuration={3000}
           maxSnack={3}

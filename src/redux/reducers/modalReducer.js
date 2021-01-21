@@ -4,7 +4,8 @@ const initialState = {
     signupModal: false,
     loginModal: false,
     propertyFormModal: false,
-    propertyDropzoneModal: false
+    propertyDropzoneModal: false,
+    propertyReviewFormModal: false
 };
 
 
@@ -26,6 +27,10 @@ const modalReducer = (state = initialState, action) => {
             return { ...state, propertyDropzoneModal: true };
         case types.CLOSE_PROPERTY_DROPZONE_MODAL:
             return { ...state, propertyDropzoneModal: false };
+        case types.SHOW_PROPERTY_REVIEW_MODAL:
+            return { ...state, propertyReviewFormModal: true };
+        case types.CLOSE_PROPERTY_REVIEW_MODAL:
+            return { ...state, propertyReviewFormModal: false };
         default:
             return state;
     }

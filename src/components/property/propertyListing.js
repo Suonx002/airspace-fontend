@@ -29,7 +29,6 @@ const PrevArrow = (props) => {
 
 const NextArrow = (props) => {
 
-
     const { className, style, onClick } = props;
     return (
         <div
@@ -53,7 +52,7 @@ const PropertyListing = (props) => {
     const slickSettings = {
         infinite: true,
         speed: 800,
-        dots: true,
+        dots: false,
         autoplay: true,
         autoplaySpeed: 3000,
         slidesToShow: 6,
@@ -96,7 +95,6 @@ const PropertyListing = (props) => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    dots: 'none'
                 }
             },
         ]

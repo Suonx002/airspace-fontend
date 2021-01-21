@@ -8,6 +8,7 @@ const secondaryColor = '#8F45AD';
 const tertiaryColor = '#2CB064';
 const darkText = '#292929';
 const lighterColor = '#f8f8f8';
+const lightColor = '#f2f2f2';
 
 const defaultTheme = createMuiTheme();
 
@@ -18,7 +19,8 @@ export default createMuiTheme({
             secondaryColor,
             tertiaryColor,
             darkText,
-            lighterColor
+            lighterColor,
+            lightColor
         },
         primary: {
             main: primaryColor

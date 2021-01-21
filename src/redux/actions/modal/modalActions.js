@@ -51,3 +51,15 @@ export const closePropertyDropzone = () => dispatch => {
         type: types.CLOSE_PROPERTY_DROPZONE_MODAL
     });
 };
+
+export const showPropertyReviewModal = () => dispatch => {
+    dispatch({
+        type: types.SHOW_PROPERTY_REVIEW_MODAL
+    });
+};
+
+export const closePropertyReviewModal = () => dispatch => {
+    dispatch({
+        type: types.CLOSE_PROPERTY_REVIEW_MODAL
+    });
+};

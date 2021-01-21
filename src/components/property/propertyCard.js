@@ -19,7 +19,6 @@ const PropertyCard = (props) => {
         price,
         propertyImage,
         propertyReviews,
-        slug,
         state,
     } = property;
 

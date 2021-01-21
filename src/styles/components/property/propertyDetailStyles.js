@@ -1,38 +1,54 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
+    propertyContainer: {
+        backgroundColor: theme.palette.common.white,
+        paddingTop: '4rem',
+
+    },
     property: {
         maxWidth: 1200,
         margin: 'auto',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        boxShadow: '0 0 8px rgba(19, 46, 70, 0.05)',
         padding: '1.5rem',
-        marginTop: '4rem'
+        alignItems: 'stretch',
+        backgroundColor: 'white',
+
 
     },
     propertyLeft: {
-        flexBasis: '70%',
+        flexBasis: '100%',
+        // border: `1px solid ${theme.palette.common.lighterColor}`
+        boxShadow: ` 0 0 12px rgba(19, 46, 70, 0.15)`
     },
-    propertyRight: {
-        flexBasis: '30%',
-    },
-    propertyLeftInner: {
-        padding: '1rem'
-    },
-    propertyRightInner: {
-        padding: '1rem'
+    // propertyRight: {
+    //     flexBasis: '20%',
+    //     border: `1px solid ${theme.palette.common.lighterColor}`
+
+
+    // },
+    profileContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: "space-between",
+        alignItems: 'center',
+        padding: '1.5rem',
+        border: `1px solid ${theme.palette.common.lighterColor}`
     },
     avatarContainer: {
+        flexBasis: '10%',
+        display: 'flex',
+        flexDirection: ' column',
+        justifyContent: 'center',
+        alignItems: 'center',
 
-        padding: '1rem',
-        marginBottom: '1.5rem',
-        borderBottom: `2px solid ${theme.palette.common.lighterColor}`
     },
-    propertyImgContainer: {
-        marginBottom: '1.5rem'
+    btnActions: {
+        marginleft: 'auto',
     },
+
     propertyImg: {
         width: '100%',
         maxHeight: 500,
@@ -50,7 +66,6 @@ export default makeStyles(theme => ({
         justifyContent: 'stretch',
         alignItems: 'stretch',
         padding: '0.5rem'
-
 
     },
     propertyDetailItem: {
@@ -127,7 +142,9 @@ export default makeStyles(theme => ({
             color: theme.palette.primary.dark
 
         }
-    }
+    },
+
+
 
 
 
