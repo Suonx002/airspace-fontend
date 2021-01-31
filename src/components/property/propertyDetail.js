@@ -102,7 +102,6 @@ const PropertyDetail = (props) => {
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Delete Property">
-
                                     <IconButton className={classes.deleteIconContainer}>
                                         <DeleteIcon className={classes.deleteIcon} />
                                     </IconButton>
@@ -152,34 +151,54 @@ const PropertyDetail = (props) => {
                                     <Box className={classes.propertyReviewItem}>
                                         <Box className={classes.propertyReviewItemInner}>
                                             <Box className={classes.propertyReviewUser}>
-                                                <Avatar src={review.user.profileImage} alt={review.user.firstName} className={classes.profileReviewImage} />
-                                                <Typography variant="h5" className={classes.propertyReviewFullName}>
-                                                    {capitalizeString(review.user.firstName)} {capitalizeString(review.user.lastName)}
-                                                </Typography>
-                                                <Box className={classes.ratingStarContainer}>
-                                                    {review.rating === 1 ? (
-                                                        <Box className={classes.ratingStar}>
-                                                            <StarIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon />
-                                                        </Box>
-                                                    ) : review.rating === 2 ? (
-                                                        <Box className={classes.ratingStar}>
-                                                            <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon />
-                                                        </Box>
-                                                    ) : review.rating === 3 ? (
-                                                        <Box className={classes.ratingStar}>
-                                                            <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon />
-                                                        </Box>
-                                                    ) : review.rating === 4 ? (
-                                                        <Box className={classes.ratingStar}>
-                                                            <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon />
-                                                        </Box>
-                                                    ) : (
-                                                                        <Box className={classes.ratingStar}>
-                                                                            <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon />
-                                                                        </Box>
+                                                <Box className={classes.propertyReviewUserLeft}>
+                                                    <Avatar src={review.user.profileImage} alt={review.user.firstName} className={classes.profileReviewImage} />
+                                                    <Typography variant="h5" className={classes.propertyReviewFullName}>
+                                                        {capitalizeString(review.user.firstName)} {capitalizeString(review.user.lastName)}
+                                                    </Typography>
+                                                    <Box className={classes.ratingStarContainer}>
+                                                        {review.rating === 1 ? (
+                                                            <Box className={classes.ratingStar}>
+                                                                <StarIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon />
+                                                            </Box>
+                                                        ) : review.rating === 2 ? (
+                                                            <Box className={classes.ratingStar}>
+                                                                <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon /> <StarBorderIcon />
+                                                            </Box>
+                                                        ) : review.rating === 3 ? (
+                                                            <Box className={classes.ratingStar}>
+                                                                <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon /> <StarBorderIcon />
+                                                            </Box>
+                                                        ) : review.rating === 4 ? (
+                                                            <Box className={classes.ratingStar}>
+                                                                <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon /> <StarBorderIcon />
+                                                            </Box>
+                                                        ) : (
+                                                            <Box className={classes.ratingStar}>
+                                                                <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon />
+                                                            </Box>
 
 
-                                                                    )}
+                                                        )}
+                                                    </Box>
+                                                </Box>
+
+                                                <Box className={classes.btnActions}>
+                                                    <Tooltip title="Edit Review">
+
+                                                        <IconButton className={classes.editIconContainer}>
+                                                            <EditIcon className={classes.editIcon}
+                                                                onClick={() => { dispatch(modalActions.showPropertyReviewModal()); }}
+                                                            />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                    <Tooltip title="Delete Review">
+
+                                                        <IconButton className={classes.deleteIconContainer}>
+                                                            <DeleteIcon className={classes.deleteIcon} />
+                                                        </IconButton>
+                                                    </Tooltip>
+
                                                 </Box>
                                             </Box>
 

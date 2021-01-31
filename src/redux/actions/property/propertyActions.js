@@ -208,16 +208,12 @@ export const createPropertyReview = (propertyId, data, enqueueSnackbar, setSubmi
 
         const res = await axios.post(`/api/v1/properties/${propertyId}/propertyReviews`, data);
 
-
-
-
-
-
         dispatch({
             type: types.CREATE_PROPERTY_REVIEW,
             payload: { propertyId, propertyReview: res.data.data }
         });
 
+        setSubmitting(false);
 
         enqueueSnackbar('Successfully created property review!', {
             variant: 'success'
@@ -231,7 +227,43 @@ export const createPropertyReview = (propertyId, data, enqueueSnackbar, setSubmi
             payload: 'Something went wrong with creating property review'
         });
 
+        setSubmitting(false);
+
         enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with creating property review!', {
+            variant: 'error'
+        });
+    }
+};
+
+export const updatePropertyReview = (propertyId, propertyReviewId, data, enqueueSnackbar, setSubmitting) => async dispatch => {
+
+    try {
+
+        const res = await axios.patch(`/api/v1/properties/${propertyId}/propertyReviews/${propertyReviewId}`, data);
+
+
+        dispatch({
+            type: types.UPDATE_PROPERTY_REVIEW,
+            payload: { propertyId, propertyReviewId, propertyReview: res.data.data }
+        });
+
+        setSubmitting(false);
+
+        enqueueSnackbar('Successfully created property review!', {
+            variant: 'success'
+        });
+
+    } catch (err) {
+        handleTokenError(err, enqueueSnackbar);
+
+        dispatch({
+            type: types.PROPERTY_REVIEW_ERROR,
+            payload: 'Something went wrong with updating property review'
+        });
+
+        setSubmitting(false);
+
+        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with updating property review!', {
             variant: 'error'
         });
     }

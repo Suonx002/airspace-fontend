@@ -126,7 +126,10 @@ export default makeStyles(theme => ({
     propertyReviewUser: {
         marginBottom: '1rem',
         paddingBottom: '1rem',
-        borderBottom: `1px solid ${theme.palette.common.lighterColor}`
+        borderBottom: `1px solid ${theme.palette.common.lighterColor}`,
+        display: 'flex',
+        justifyContent: "space-between",
+        alignItems: 'center'
     },
     propertyReviewFullName: {
         color: theme.palette.common.primaryColor

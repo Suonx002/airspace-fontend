@@ -39,6 +39,17 @@ const propertyReducer = (state = initialState, action) => {
                 error: null,
                 property: { ...state.property, propertyReviews: [action.payload.propertyReview, ...state.property.propertyReviews] }
             };
+        case types.UPDATE_PROPERTY_REVIEW:
+            return {
+                ...state,
+                isLoading: false,
+                error: null,
+                property: {
+                    ...state.property,
+                    propertyReviews: state.property.propertyReviews.map(review => review.id === action.payload.propertyReviewId ? action.payload.propertyReview : review)
+                }
+
+            };
 
         default:
             return state;
