@@ -51,6 +51,18 @@ const propertyReducer = (state = initialState, action) => {
 
             };
 
+        case types.DELETE_PROPERTY_REVIEW:
+            return {
+                ...state,
+                isLoading: false,
+                error: null,
+                property: {
+                    ...state.property,
+                    propertyReviews: state.property.propertyReviews.filter(review => review.id !== action.payload.propertyReviewId)
+                }
+
+            };
+
         default:
             return state;
     }

@@ -249,7 +249,7 @@ export const updatePropertyReview = (propertyId, propertyReviewId, data, enqueue
 
         setSubmitting(false);
 
-        enqueueSnackbar('Successfully created property review!', {
+        enqueueSnackbar('Successfully updated property review!', {
             variant: 'success'
         });
 
@@ -264,6 +264,38 @@ export const updatePropertyReview = (propertyId, propertyReviewId, data, enqueue
         setSubmitting(false);
 
         enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with updating property review!', {
+            variant: 'error'
+        });
+    }
+};
+
+export const deletePropertyReview = (propertyId, propertyReviewId, enqueueSnackbar) => async dispatch => {
+
+    try {
+
+        await axios.delete(`/api/v1/properties/${propertyId}/propertyReviews/${propertyReviewId}`);
+
+
+        dispatch({
+            type: types.DELETE_PROPERTY_REVIEW,
+            payload: { propertyReviewId }
+        });
+
+
+        enqueueSnackbar('Successfully deleted property review!', {
+            variant: 'success'
+        });
+
+    } catch (err) {
+        handleTokenError(err, enqueueSnackbar);
+
+        dispatch({
+            type: types.PROPERTY_REVIEW_ERROR,
+            payload: 'Something went wrong with deleting property review'
+        });
+
+
+        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with deleting property review!', {
             variant: 'error'
         });
     }

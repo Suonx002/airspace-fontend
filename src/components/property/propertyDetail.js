@@ -195,7 +195,14 @@ const PropertyDetail = (props) => {
                                                     <Tooltip title="Delete Review">
 
                                                         <IconButton className={classes.deleteIconContainer}>
-                                                            <DeleteIcon className={classes.deleteIcon} />
+                                                            <DeleteIcon className={classes.deleteIcon}
+                                                                onClick={() => {
+                                                                    if (window.confirm("Are you sure you want to delete this review?")) {
+                                                                        dispatch(propertyActions.deletePropertyReview(property.id, review.id, enqueueSnackbar));
+                                                                    }
+
+                                                                }}
+                                                            />
                                                         </IconButton>
                                                     </Tooltip>
 
