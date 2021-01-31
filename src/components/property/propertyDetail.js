@@ -21,8 +21,10 @@ import EditIcon from '@material-ui/icons/Edit';
 import useStyles from '../../styles/components/property/propertyDetailStyles';
 
 import capitalizeString from '../../utils/methods/capitalizeString';
+import PropertyReviewFormDialog from './propertyReviewFormDialog';
 
 import * as propertyActions from '../../redux/actions/property/propertyActions';
+import * as modalActions from '../../redux/actions/modal/modalActions';
 
 const PropertyDetail = (props) => {
 
@@ -73,6 +75,7 @@ const PropertyDetail = (props) => {
 
     return property !== null && property !== undefined ? (
         <section className={classes.propertyContainer}>
+            <PropertyReviewFormDialog />
             <Box className={classes.property}>
                 {/* left  75% */}
                 <Box className={classes.propertyLeft}>
@@ -93,7 +96,9 @@ const PropertyDetail = (props) => {
                                 <Tooltip title="Edit Property">
 
                                     <IconButton className={classes.editIconContainer}>
-                                        <EditIcon className={classes.editIcon} />
+                                        <EditIcon className={classes.editIcon}
+                                            onClick={() => { dispatch(modalActions.showPropertyReviewModal()); }}
+                                        />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Delete Property">
