@@ -6,6 +6,13 @@ import handleTokenError from '../../../utils/methods/handleTokenError';
 
 import * as modalActions from '../modal/modalActions';
 
+
+
+
+/*** 
+ * PROPERTY ACTIONS
+ ***/
+
 export const getHomepageProperties = (enqueueSnackbar) => async dispatch => {
     try {
         const res = await axios.get(`/api/v1/properties/homepage`);
@@ -188,3 +195,44 @@ export const clearPropertyError = () => dispatch => {
     });
 };
 
+
+
+
+/*** 
+ * PROPERTY  REVIEW ACTIONS
+ ***/
+
+export const createPropertyReview = (propertyId, data, enqueueSnackbar, setSubmitting) => async (dispatch) => {
+    try {
+
+
+        const res = await axios.post(`/api/v1/properties/${propertyId}/propertyReviews`, data);
+
+
+
+
+
+
+        dispatch({
+            type: types.CREATE_PROPERTY_REVIEW,
+            payload: { propertyId, propertyReview: res.data.data }
+        });
+
+
+        enqueueSnackbar('Successfully created property review!', {
+            variant: 'success'
+        });
+
+    } catch (err) {
+        handleTokenError(err, enqueueSnackbar);
+
+        dispatch({
+            type: types.PROPERTY_REVIEW_ERROR,
+            payload: 'Something went wrong with creating property review'
+        });
+
+        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with creating property review!', {
+            variant: 'error'
+        });
+    }
+};

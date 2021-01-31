@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
@@ -8,6 +9,7 @@ import * as yup from 'yup';
 import { Dialog, DialogTitle, DialogContent, Box, CircularProgress, Button, Slide } from '@material-ui/core';
 
 import * as modalActions from '../../redux/actions/modal/modalActions';
+import * as propertyActions from '../../redux/actions/property/propertyActions';
 
 import useStyles from '../../styles/components/property/propertyReviewFormDialogStyles';
 
@@ -15,9 +17,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const PropertyReviewFormDialog = () => {
+const PropertyReviewFormDialog = (props) => {
 
+    const { propertyId } = props;
     const classes = useStyles();
+    const { enqueueSnackbar } = useSnackbar();
 
     const dispatch = useDispatch();
     const { modal: { propertyReviewFormModal } } = useSelector(state => state);
@@ -64,14 +68,10 @@ const PropertyReviewFormDialog = () => {
     ];
 
     const onFormSubmit = (values, { setSubmitting }) => {
-        console.log({
-            values
-        });
+        // create property review
+        dispatch(propertyActions.createPropertyReview(propertyId, values, enqueueSnackbar, setSubmitting));
     };
 
-    console.log({
-        propertyReviewFormModal
-    });
 
     return (
         <Dialog

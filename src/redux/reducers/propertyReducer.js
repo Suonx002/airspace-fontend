@@ -12,6 +12,7 @@ const initialState = {
 
 const propertyReducer = (state = initialState, action) => {
     switch (action.type) {
+        // START PROPERTY ACTIONS
         case types.GET_HOMEPAGE_PROPERTIES:
             return { ...state, homepageProperties: action.payload, isLoading: false, error: null };
         case types.GET_ALL_PROPERTIES:
@@ -30,6 +31,15 @@ const propertyReducer = (state = initialState, action) => {
             return { ...state, currentProperty: null, isLoading: false, error: null };
         case types.PROPERTY_ERROR:
             return { ...state, error: action.payload, isLoading: false };
+        // START PROPERTY REVIEW ACTIONS
+        case types.CREATE_PROPERTY_REVIEW:
+            return {
+                ...state,
+                isLoading: false,
+                error: null,
+                property: { ...state.property, propertyReviews: [action.payload.propertyReview, ...state.property.propertyReviews] }
+            };
+
         default:
             return state;
     }

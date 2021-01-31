@@ -75,7 +75,7 @@ const PropertyDetail = (props) => {
 
     return property !== null && property !== undefined ? (
         <section className={classes.propertyContainer}>
-            <PropertyReviewFormDialog />
+            <PropertyReviewFormDialog propertyId={property.id} />
             <Box className={classes.property}>
                 {/* left  75% */}
                 <Box className={classes.propertyLeft}>
