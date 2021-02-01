@@ -19,25 +19,30 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const PropertyForm = () => {
+const PropertyForm = (props) => {
+
 
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
 
     const dispatch = useDispatch();
-    const { modal: { propertyFormModal }, imageFile: { propertyUploadFile } } = useSelector(state => state);
+    const {
+        modal: { propertyFormModal },
+        imageFile: { propertyUploadFile },
+        property: { currentProperty }
+    } = useSelector(state => state);
 
     const initialValues = {
-        title: '',
-        description: '',
-        address: '',
-        state: '',
-        city: '',
-        bedrooms: 1,
-        bathrooms: 1,
-        guests: 1,
-        zipcode: '',
-        price: 0,
+        title: currentProperty?.title ?? '',
+        description: currentProperty?.description ?? '',
+        address: currentProperty?.address ?? '',
+        state: currentProperty?.state ?? '',
+        city: currentProperty?.city ?? '',
+        bedrooms: currentProperty?.bedrooms ?? '',
+        bathrooms: currentProperty?.bathrooms ?? '',
+        guests: currentProperty?.guests ?? '',
+        zipcode: currentProperty?.zipcode ?? '',
+        price: currentProperty?.price ?? '',
     };
 
     const propertySchema = yup.object().shape({
@@ -55,6 +60,7 @@ const PropertyForm = () => {
 
 
     const onFormSubmit = (values, { setSubmitting }) => {
+
 
         if (!propertyUploadFile) {
             enqueueSnackbar('Please upload an image for property!', {
@@ -83,7 +89,9 @@ const PropertyForm = () => {
             name: 'description',
             component: TextField,
             variant: 'outlined',
-            type: 'text'
+            type: 'text',
+            rows: 4,
+            multiline: true
         },
         {
             label: 'Address',
@@ -152,14 +160,18 @@ const PropertyForm = () => {
             <PropertyDropzoneDialog />
             <Dialog
                 open={propertyFormModal}
-                onClose={() => { dispatch(modalActions.closePropertyFormModal()); }}
+                onClose={() => {
+                    dispatch(propertyActions.clearCurrentProperty());
+                    dispatch(modalActions.closePropertyFormModal());
+                }}
                 TransitionComponent={Transition}
                 aria-labelledby="property-form-dialog" maxWidth="sm"
                 className={classes.dialog}
             >
                 <DialogContent>
-                    <Typography variant="h3" className={classes.title}> Create Property</Typography>
+                    <Typography variant="h3" className={classes.title}> {currentProperty ? 'Update' : 'Create'} Property</Typography>
                     <Formik
+                        enableReinitialize={currentProperty ? true : false}
                         initialValues={initialValues}
                         validationSchema={propertySchema}
                         onSubmit={onFormSubmit}
@@ -171,7 +183,9 @@ const PropertyForm = () => {
                                     {/* full width fields */}
                                     {fullWidthFields.map(field => (
                                         <Box key={field.name} className={classes.fullWidthField}>
-                                            <Field type={field.type} component={field.component} label={field.label} name={field.name} variant={field.variant} />
+                                            <Field type={field.type} component={field.component} label={field.label} name={field.name} variant={field.variant} multiline={field.multiline && field.multiline}
+                                                rows={field.rows && field.rows}
+                                            />
                                         </Box>
                                     ))}
 

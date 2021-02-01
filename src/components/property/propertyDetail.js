@@ -22,6 +22,7 @@ import useStyles from '../../styles/components/property/propertyDetailStyles';
 
 import capitalizeString from '../../utils/methods/capitalizeString';
 import PropertyReviewFormDialog from './propertyReviewFormDialog';
+import PropertyForm from './propertyForm';
 
 import * as propertyActions from '../../redux/actions/property/propertyActions';
 import * as modalActions from '../../redux/actions/modal/modalActions';
@@ -75,7 +76,6 @@ const PropertyDetail = (props) => {
 
     return property !== null && property !== undefined ? (
         <section className={classes.propertyContainer}>
-            <PropertyReviewFormDialog propertyId={property.id} />
             <Box className={classes.property}>
                 {/* left  75% */}
                 <Box className={classes.propertyLeft}>
@@ -93,11 +93,17 @@ const PropertyDetail = (props) => {
                             </Box>
 
                             <Box className={classes.btnActions}>
-                                <Tooltip title="Edit Property">
+                                <PropertyForm />
 
-                                    <IconButton className={classes.editIconContainer}>
+                                <Tooltip title="Edit Property">
+                                    <IconButton className={classes.editIconContainer}
+                                        onClick={() => {
+                                            dispatch(propertyActions.getCurrentProperty(property));
+                                            dispatch(modalActions.showPropertyFormModal());
+                                        }}
+                                    >
                                         <EditIcon className={classes.editIcon}
-                                            onClick={() => { dispatch(modalActions.showPropertyReviewModal()); }}
+
                                         />
                                     </IconButton>
                                 </Tooltip>
@@ -184,24 +190,31 @@ const PropertyDetail = (props) => {
                                                 </Box>
 
                                                 <Box className={classes.btnActions}>
+                                                    <PropertyReviewFormDialog propertyId={property.id} />
                                                     <Tooltip title="Edit Review">
 
-                                                        <IconButton className={classes.editIconContainer}>
+                                                        <IconButton className={classes.editIconContainer}
+                                                            onClick={() => { dispatch(modalActions.showPropertyReviewModal()); }}
+
+                                                        >
                                                             <EditIcon className={classes.editIcon}
-                                                                onClick={() => { dispatch(modalActions.showPropertyReviewModal()); }}
+
                                                             />
                                                         </IconButton>
                                                     </Tooltip>
                                                     <Tooltip title="Delete Review">
 
-                                                        <IconButton className={classes.deleteIconContainer}>
-                                                            <DeleteIcon className={classes.deleteIcon}
-                                                                onClick={() => {
-                                                                    if (window.confirm("Are you sure you want to delete this review?")) {
-                                                                        dispatch(propertyActions.deletePropertyReview(property.id, review.id, enqueueSnackbar));
-                                                                    }
+                                                        <IconButton className={classes.deleteIconContainer}
 
-                                                                }}
+                                                            onClick={() => {
+                                                                if (window.confirm("Are you sure you want to delete this review?")) {
+                                                                    dispatch(propertyActions.deletePropertyReview(property.id, review.id, enqueueSnackbar));
+                                                                }
+
+                                                            }}
+                                                        >
+                                                            <DeleteIcon className={classes.deleteIcon}
+
                                                             />
                                                         </IconButton>
                                                     </Tooltip>

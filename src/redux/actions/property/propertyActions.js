@@ -129,9 +129,13 @@ export const updateProperty = (data, enqueueSnackbar) => async dispatch => {
             payload: res.data.data
         });
 
+        dispatch(clearCurrentProperty());
+
+
         enqueueSnackbar('Successfully updated a property!', {
             variant: 'success'
         });
+
 
     } catch (err) {
         handleTokenError(err, enqueueSnackbar);

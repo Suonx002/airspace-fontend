@@ -53,7 +53,7 @@ const AuthMenu = () => {
                         color='primary'
                         className={classes.propertyBtnContainer}>
                         <Tooltip title="Create Property">
-                            <AddIcon classname={classes.propertyBtn} />
+                            <AddIcon className={classes.propertyBtn} />
                         </Tooltip>
                     </IconButton>
                 </>

@@ -117,8 +117,8 @@ const Jumbotron = () => {
                                     <Field
                                         className={classes[field.className]}
                                         variant={field.variant}
-                                        inputVariant={field.inputVariant}
-                                        disableToolbar={field.disableToolbar}
+                                        inputVariant={field?.inputVariant ?? null}
+                                        disableToolbar={field?.disableToolbar ?? null}
                                         color={field.color}
                                         component={field.component}
                                         placeholder={field.placeholder}
