@@ -43,8 +43,10 @@ export const getAllProperties = (enqueueSnackbar) => async dispatch => {
 
         dispatch({
             type: types.PROPERTY_ERROR,
-            payload: 'Something went wrong with creating a property'
+            payload: 'Something went wrong with get all properties'
         });
+
+
     }
 };
 
@@ -64,7 +66,7 @@ export const getSingleProperty = (propertyId, enqueueSnackbar) => async dispatch
 
         dispatch({
             type: types.PROPERTY_ERROR,
-            payload: 'Something went wrong with creating a property'
+            payload: 'Something went wrong with get a property'
         });
     }
 };
@@ -108,7 +110,7 @@ export const createProperty = (data, enqueueSnackbar, setSubmitting) => async di
             payload: 'Something went wrong with creating a property'
         });
 
-        enqueueSnackbar('Something went wrong with creating a property!', {
+        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with creating a property!', {
             variant: 'error'
         });
         setSubmitting(false);
@@ -145,7 +147,7 @@ export const updateProperty = (data, enqueueSnackbar) => async dispatch => {
             payload: 'Something went wrong with updating a property'
         });
 
-        enqueueSnackbar('Something went wrong with updating a property!', {
+        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with updating a property!', {
             variant: 'error'
         });
 
@@ -174,7 +176,7 @@ export const deleteProperty = (propertyId, enqueueSnackbar) => async dispatch =>
             payload: 'Something went wrong with deleting a property'
         });
 
-        enqueueSnackbar('Something went wrong with deleting a property!', {
+        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with deleting a property!', {
             variant: 'error'
         });
     }
