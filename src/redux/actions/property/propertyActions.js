@@ -3,306 +3,345 @@ import axios from 'axios';
 import * as types from './propertyTypes';
 import handleTokenError from '../../../utils/methods/handleTokenError';
 
-
 import * as modalActions from '../modal/modalActions';
 
-
-
-
-/*** 
+/***
  * PROPERTY ACTIONS
  ***/
 
-export const getHomepageProperties = (enqueueSnackbar) => async dispatch => {
-    try {
-        const res = await axios.get(`/api/v1/properties/homepage`);
+export const getHomepageProperties = (enqueueSnackbar) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/properties/homepage`);
 
-        dispatch({
-            type: types.GET_HOMEPAGE_PROPERTIES,
-            payload: res.data.data
-        });
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
-    }
-};
-
-
-export const getAllProperties = (enqueueSnackbar) => async dispatch => {
-    try {
-        const res = await axios.get(`/api/v1/properties`);
-
-        dispatch({
-            type: types.CREATE_PROPERTY,
-            payload: res.data.data
-        });
-
-
-
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
-
-        dispatch({
-            type: types.PROPERTY_ERROR,
-            payload: 'Something went wrong with get all properties'
-        });
-
-
-    }
-};
-
-export const getSingleProperty = (propertyId, enqueueSnackbar) => async dispatch => {
-    try {
-        const res = await axios.get(`/api/v1/properties/${propertyId}`);
-
-        dispatch({
-            type: types.GET_SINGLE_PROPERTY,
-            payload: res.data.data
-        });
-
-
-
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
-
-        dispatch({
-            type: types.PROPERTY_ERROR,
-            payload: 'Something went wrong with get a property'
-        });
-    }
-};
-
-
-
-export const createProperty = (data, enqueueSnackbar, setSubmitting) => async dispatch => {
-    try {
-        const formData = new FormData();
-
-        for (let key in data) {
-            formData.append(key, data[key]);
-        }
-
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
-
-        const res = await axios.post(`/api/v1/properties`, formData, config);
-
-        dispatch({
-            type: types.CREATE_PROPERTY,
-            payload: res.data.data
-        });
-
-        dispatch(modalActions.closePropertyFormModal());
-
-        enqueueSnackbar('Successfully created a new property!', {
-            variant: 'success'
-        });
-
-        setSubmitting(false);
-
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
-
-        dispatch({
-            type: types.PROPERTY_ERROR,
-            payload: 'Something went wrong with creating a property'
-        });
-
-        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with creating a property!', {
-            variant: 'error'
-        });
-        setSubmitting(false);
-
-        dispatch(modalActions.showPropertyFormModal());
-
-
-
-    }
-};
-
-export const updateProperty = (data, enqueueSnackbar) => async dispatch => {
-    try {
-        const res = await axios.patch(`/api/v1/properties/${data.propertyId}`, data);
-
-        dispatch({
-            type: types.UPDATE_PROPERTY,
-            payload: res.data.data
-        });
-
-        dispatch(clearCurrentProperty());
-
-
-        enqueueSnackbar('Successfully updated a property!', {
-            variant: 'success'
-        });
-
-
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
-
-        dispatch({
-            type: types.PROPERTY_ERROR,
-            payload: 'Something went wrong with updating a property'
-        });
-
-        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with updating a property!', {
-            variant: 'error'
-        });
-
-    }
-};
-
-
-export const deleteProperty = (propertyId, enqueueSnackbar) => async dispatch => {
-    try {
-        await axios.delete(`/api/v1/properties/${propertyId}`);
-
-        dispatch({
-            type: types.DELETE_PROPERTY,
-        });
-
-        enqueueSnackbar('Successfully deleted a property!', {
-            variant: 'success',
-            payload: propertyId
-        });
-
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
-
-        dispatch({
-            type: types.PROPERTY_ERROR,
-            payload: 'Something went wrong with deleting a property'
-        });
-
-        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with deleting a property!', {
-            variant: 'error'
-        });
-    }
-};
-
-export const getCurrentProperty = data => dispatch => {
     dispatch({
-        type: types.GET_CURRENT_PROPERTY,
-        payload: data
+      type: types.GET_HOMEPAGE_PROPERTIES,
+      payload: res.data.data,
     });
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
+  }
 };
 
-export const clearCurrentProperty = () => dispatch => {
+export const getAllProperties = (enqueueSnackbar) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/properties`);
+
     dispatch({
-        type: types.CLEAR_CURRENT_PROPERTY,
+      type: types.CREATE_PROPERTY,
+      payload: res.data.data,
     });
-};
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
 
-export const clearPropertyError = () => dispatch => {
     dispatch({
-        type: types.CLEAR_PROPERTY_ERROR,
+      type: types.PROPERTY_ERROR,
+      payload: 'Something went wrong with get all properties',
     });
+  }
 };
 
+export const getSingleProperty = (propertyId, enqueueSnackbar) => async (
+  dispatch
+) => {
+  try {
+    const res = await axios.get(`/api/v1/properties/${propertyId}`);
 
+    dispatch({
+      type: types.GET_SINGLE_PROPERTY,
+      payload: res.data.data,
+    });
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
 
+    dispatch({
+      type: types.PROPERTY_ERROR,
+      payload: 'Something went wrong with get a property',
+    });
+  }
+};
 
-/*** 
+export const createProperty = (data, enqueueSnackbar, setSubmitting) => async (
+  dispatch
+) => {
+  try {
+    const formData = new FormData();
+
+    for (let key in data) {
+      formData.append(key, data[key]);
+    }
+
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+
+    const res = await axios.post(`/api/v1/properties`, formData, config);
+
+    dispatch({
+      type: types.CREATE_PROPERTY,
+      payload: res.data.data,
+    });
+
+    dispatch(modalActions.closePropertyFormModal());
+
+    enqueueSnackbar('Successfully created a new property!', {
+      variant: 'success',
+    });
+
+    setSubmitting(false);
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
+
+    dispatch({
+      type: types.PROPERTY_ERROR,
+      payload: 'Something went wrong with creating a property',
+    });
+
+    enqueueSnackbar(
+      err?.response?.data?.message ??
+        'Something went wrong with creating a property!',
+      {
+        variant: 'error',
+      }
+    );
+    setSubmitting(false);
+
+    dispatch(modalActions.showPropertyFormModal());
+  }
+};
+
+export const updateProperty = (data, enqueueSnackbar) => async (dispatch) => {
+  try {
+    const res = await axios.patch(
+      `/api/v1/properties/${data.propertyId}`,
+      data
+    );
+
+    dispatch({
+      type: types.UPDATE_PROPERTY,
+      payload: res.data.data,
+    });
+
+    dispatch(clearCurrentProperty());
+
+    enqueueSnackbar('Successfully updated a property!', {
+      variant: 'success',
+    });
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
+
+    dispatch({
+      type: types.PROPERTY_ERROR,
+      payload: 'Something went wrong with updating a property',
+    });
+
+    enqueueSnackbar(
+      err?.response?.data?.message ??
+        'Something went wrong with updating a property!',
+      {
+        variant: 'error',
+      }
+    );
+  }
+};
+
+export const deleteProperty = (propertyId, enqueueSnackbar) => async (
+  dispatch
+) => {
+  try {
+    await axios.delete(`/api/v1/properties/${propertyId}`);
+
+    dispatch({
+      type: types.DELETE_PROPERTY,
+    });
+
+    enqueueSnackbar('Successfully deleted a property!', {
+      variant: 'success',
+      payload: propertyId,
+    });
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
+
+    dispatch({
+      type: types.PROPERTY_ERROR,
+      payload: 'Something went wrong with deleting a property',
+    });
+
+    enqueueSnackbar(
+      err?.response?.data?.message ??
+        'Something went wrong with deleting a property!',
+      {
+        variant: 'error',
+      }
+    );
+  }
+};
+
+export const getCurrentProperty = (data) => (dispatch) => {
+  dispatch({
+    type: types.GET_CURRENT_PROPERTY,
+    payload: data,
+  });
+};
+
+export const clearCurrentProperty = () => (dispatch) => {
+  dispatch({
+    type: types.CLEAR_CURRENT_PROPERTY,
+  });
+};
+
+export const clearPropertyError = () => (dispatch) => {
+  dispatch({
+    type: types.CLEAR_PROPERTY_ERROR,
+  });
+};
+
+/***
  * PROPERTY  REVIEW ACTIONS
  ***/
 
-export const createPropertyReview = (propertyId, data, enqueueSnackbar, setSubmitting) => async (dispatch) => {
-    try {
+export const createPropertyReview = (
+  propertyId,
+  data,
+  enqueueSnackbar,
+  setSubmitting
+) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      `/api/v1/properties/${propertyId}/propertyReviews`,
+      data
+    );
 
+    dispatch({
+      type: types.CREATE_PROPERTY_REVIEW,
+      payload: { propertyId, propertyReview: res.data.data },
+    });
 
-        const res = await axios.post(`/api/v1/properties/${propertyId}/propertyReviews`, data);
+    setSubmitting(false);
 
-        dispatch({
-            type: types.CREATE_PROPERTY_REVIEW,
-            payload: { propertyId, propertyReview: res.data.data }
-        });
+    dispatch(modalActions.closePropertyReviewModal());
 
-        setSubmitting(false);
+    enqueueSnackbar('Successfully created property review!', {
+      variant: 'success',
+    });
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
 
-        enqueueSnackbar('Successfully created property review!', {
-            variant: 'success'
-        });
+    dispatch({
+      type: types.PROPERTY_REVIEW_ERROR,
+      payload: 'Something went wrong with creating property review',
+    });
 
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
+    setSubmitting(false);
+    dispatch(modalActions.showPropertyReviewModal());
 
-        dispatch({
-            type: types.PROPERTY_REVIEW_ERROR,
-            payload: 'Something went wrong with creating property review'
-        });
-
-        setSubmitting(false);
-
-        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with creating property review!', {
-            variant: 'error'
-        });
-    }
+    enqueueSnackbar(
+      err?.response?.data?.message ??
+        'Something went wrong with creating property review!',
+      {
+        variant: 'error',
+      }
+    );
+  }
 };
 
-export const updatePropertyReview = (propertyId, propertyReviewId, data, enqueueSnackbar, setSubmitting) => async dispatch => {
+export const updatePropertyReview = (
+  propertyId,
+  propertyReviewId,
+  data,
+  enqueueSnackbar,
+  setSubmitting
+) => async (dispatch) => {
+  try {
+    const res = await axios.patch(
+      `/api/v1/properties/${propertyId}/propertyReviews/${propertyReviewId}`,
+      data
+    );
 
-    try {
+    dispatch({
+      type: types.UPDATE_PROPERTY_REVIEW,
+      payload: { propertyId, propertyReviewId, propertyReview: res.data.data },
+    });
 
-        const res = await axios.patch(`/api/v1/properties/${propertyId}/propertyReviews/${propertyReviewId}`, data);
+    setSubmitting(false);
+    dispatch(modalActions.closePropertyReviewModal());
 
+    enqueueSnackbar('Successfully updated property review!', {
+      variant: 'success',
+    });
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
 
-        dispatch({
-            type: types.UPDATE_PROPERTY_REVIEW,
-            payload: { propertyId, propertyReviewId, propertyReview: res.data.data }
-        });
+    dispatch({
+      type: types.PROPERTY_REVIEW_ERROR,
+      payload: 'Something went wrong with updating property review',
+    });
 
-        setSubmitting(false);
+    setSubmitting(false);
+    dispatch(modalActions.showPropertyReviewModal());
 
-        enqueueSnackbar('Successfully updated property review!', {
-            variant: 'success'
-        });
-
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
-
-        dispatch({
-            type: types.PROPERTY_REVIEW_ERROR,
-            payload: 'Something went wrong with updating property review'
-        });
-
-        setSubmitting(false);
-
-        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with updating property review!', {
-            variant: 'error'
-        });
-    }
+    enqueueSnackbar(
+      err?.response?.data?.message ??
+        'Something went wrong with updating property review!',
+      {
+        variant: 'error',
+      }
+    );
+  }
 };
 
-export const deletePropertyReview = (propertyId, propertyReviewId, enqueueSnackbar) => async dispatch => {
+export const deletePropertyReview = (
+  propertyId,
+  propertyReviewId,
+  enqueueSnackbar
+) => async (dispatch) => {
+  try {
+    await axios.delete(
+      `/api/v1/properties/${propertyId}/propertyReviews/${propertyReviewId}`
+    );
 
-    try {
+    dispatch({
+      type: types.DELETE_PROPERTY_REVIEW,
+      payload: { propertyReviewId },
+    });
 
-        await axios.delete(`/api/v1/properties/${propertyId}/propertyReviews/${propertyReviewId}`);
+    enqueueSnackbar('Successfully deleted property review!', {
+      variant: 'success',
+    });
+  } catch (err) {
+    handleTokenError(err, enqueueSnackbar);
 
+    dispatch({
+      type: types.PROPERTY_REVIEW_ERROR,
+      payload: 'Something went wrong with deleting property review',
+    });
 
-        dispatch({
-            type: types.DELETE_PROPERTY_REVIEW,
-            payload: { propertyReviewId }
-        });
+    enqueueSnackbar(
+      err?.response?.data?.message ??
+        'Something went wrong with deleting property review!',
+      {
+        variant: 'error',
+      }
+    );
+  }
+};
 
+export const getCurrentPropertyReview = (data) => (dispatch) => {
+  dispatch({
+    type: types.GET_CURRENT_PROPERTY_REVIEW,
+    payload: data,
+  });
+};
 
-        enqueueSnackbar('Successfully deleted property review!', {
-            variant: 'success'
-        });
+export const clearCurrentPropertyReview = () => (dispatch) => {
+  dispatch({
+    type: types.CLEAR_CURRENT_PROPERTY_REVIEW,
+  });
+};
 
-    } catch (err) {
-        handleTokenError(err, enqueueSnackbar);
-
-        dispatch({
-            type: types.PROPERTY_REVIEW_ERROR,
-            payload: 'Something went wrong with deleting property review'
-        });
-
-
-        enqueueSnackbar(err?.response?.data?.message ?? 'Something went wrong with deleting property review!', {
-            variant: 'error'
-        });
-    }
+export const clearPropertyReviewError = () => (dispatch) => {
+  dispatch({
+    type: types.CLEAR_PROPERTY_REVIEW_ERROR,
+  });
 };

@@ -110,6 +110,9 @@ export default makeStyles(theme => ({
         marginBottom: '1.5rem',
         color: theme.palette.secondary.main
     },
+    noReviewDescription: {
+        marginBottom: '1rem'
+    },
     propertyReviews: {
         display: 'flex',
         flexDirection: 'column',
