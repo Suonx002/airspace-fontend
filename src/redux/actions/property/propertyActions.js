@@ -111,19 +111,33 @@ export const createProperty = (data, enqueueSnackbar, setSubmitting) => async (
   }
 };
 
-export const updateProperty = (data, enqueueSnackbar) => async (dispatch) => {
+export const updateProperty = (
+  data,
+  propertyId,
+  propertyUploadFile,
+  enqueueSnackbar,
+  setSubmitting
+) => async (dispatch) => {
   try {
-    const res = await axios.patch(
-      `/api/v1/properties/${data.propertyId}`,
-      data
-    );
+    const formData = new FormData();
+
+    for (let key in data) {
+      formData.append(key, data[key]);
+    }
+
+    if (propertyUploadFile) {
+      formData.append('propertyImage', propertyUploadFile);
+    }
+
+    const res = await axios.patch(`/api/v1/properties/${propertyId}`, formData);
 
     dispatch({
       type: types.UPDATE_PROPERTY,
       payload: res.data.data,
     });
 
-    dispatch(clearCurrentProperty());
+    setSubmitting(false);
+    dispatch(modalActions.closePropertyFormModal());
 
     enqueueSnackbar('Successfully updated a property!', {
       variant: 'success',
@@ -135,6 +149,9 @@ export const updateProperty = (data, enqueueSnackbar) => async (dispatch) => {
       type: types.PROPERTY_ERROR,
       payload: 'Something went wrong with updating a property',
     });
+
+    setSubmitting(false);
+    dispatch(modalActions.showPropertyFormModal());
 
     enqueueSnackbar(
       err?.response?.data?.message ??
@@ -208,6 +225,11 @@ export const createPropertyReview = (
   setSubmitting
 ) => async (dispatch) => {
   try {
+    console.log({
+      jwtToken: localStorage.jwtToken,
+      header: axios.defaults.headers.common['Authorization'],
+    });
+
     const res = await axios.post(
       `/api/v1/properties/${propertyId}/propertyReviews`,
       data

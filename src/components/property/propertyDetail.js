@@ -39,7 +39,10 @@ const PropertyDetail = (props) => {
   const params = useParams();
 
   const dispatch = useDispatch();
-  const { property } = useSelector((state) => state.property);
+  const {
+    property: { property },
+    auth: { user },
+  } = useSelector((state) => state);
 
   useEffect(() => {
     if (params.propertyId) {
@@ -104,31 +107,34 @@ const PropertyDetail = (props) => {
                 </Typography>
               </Box>
 
-              <Box className={classes.btnActions}>
-                <PropertyForm />
+              {property?.user?.id === user?.id && (
+                <Box className={classes.btnActions}>
+                  <PropertyForm />
 
-                <Tooltip title='Edit Property'>
-                  <IconButton
-                    className={classes.editIconContainer}
-                    onClick={() => {
-                      dispatch(propertyActions.getCurrentProperty(property));
-                      dispatch(modalActions.showPropertyFormModal());
-                    }}>
-                    <EditIcon className={classes.editIcon} />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title='Delete Property'>
-                  <IconButton className={classes.deleteIconContainer}>
-                    <DeleteIcon className={classes.deleteIcon} />
-                  </IconButton>
-                </Tooltip>
-              </Box>
+                  <Tooltip title='Edit Property'>
+                    <IconButton
+                      className={classes.editIconContainer}
+                      onClick={() => {
+                        dispatch(propertyActions.getCurrentProperty(property));
+                        dispatch(modalActions.showPropertyFormModal());
+                      }}>
+                      <EditIcon className={classes.editIcon} />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title='Delete Property'>
+                    <IconButton className={classes.deleteIconContainer}>
+                      <DeleteIcon className={classes.deleteIcon} />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+              )}
             </Box>
             <Box className={classes.propertyContent}>
               <Typography
                 variant='h2'
                 color='primary'
-                className={classes.title}>
+                className={classes.title}
+                style={{ textTransform: 'capitalize' }}>
                 {property.title}
               </Typography>
               <Box className={classes.propertyDetail}>
@@ -139,11 +145,15 @@ const PropertyDetail = (props) => {
                         {item.icon}
                         <Box className={classes.propertyDetailContent}>
                           {item.titleTop && (
-                            <Typography className={classes.propertyDetailTitle}>
+                            <Typography
+                              className={classes.propertyDetailTitle}
+                              style={{ textTransform: 'capitalize' }}>
                               {item.titleTop}
                             </Typography>
                           )}
-                          <Typography className={classes.propertyDetailTitle}>
+                          <Typography
+                            className={classes.propertyDetailTitle}
+                            style={{ textTransform: 'capitalize' }}>
                             {item.title}
                           </Typography>
                         </Box>
@@ -158,7 +168,9 @@ const PropertyDetail = (props) => {
                   className={classes.propertyReviewTitle}>
                   Description
                 </Typography>
-                <Typography variant='body1'>{property.description}</Typography>
+                <Typography variant='body1'>
+                  {capitalizeString(property.description)}
+                </Typography>
               </Box>
               <Box className={classes.propertyReviews}>
                 <PropertyReviewFormDialog propertyId={property.id} />
@@ -185,15 +197,27 @@ const PropertyDetail = (props) => {
                       Currently no review, would you like to create one?
                     </Typography>
                   )}
-                  <Button
-                    variant='contained'
-                    color='primary'
-                    className={classes.noReviewBtn}
-                    onClick={() => {
-                      dispatch(modalActions.showPropertyReviewModal());
-                    }}>
-                    Create Review
-                  </Button>
+                  {user ? (
+                    <Button
+                      variant='contained'
+                      color='primary'
+                      className={classes.noReviewBtn}
+                      onClick={() => {
+                        dispatch(modalActions.showPropertyReviewModal());
+                      }}>
+                      Create Review
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='contained'
+                      color='primary'
+                      className={classes.noReviewBtn}
+                      onClick={() => {
+                        dispatch(modalActions.showLoginModal());
+                      }}>
+                      Login
+                    </Button>
+                  )}
                 </Box>
 
                 {/* listing out reviews */}
@@ -244,46 +268,48 @@ const PropertyDetail = (props) => {
                           </Box>
                         </Box>
 
-                        <Box className={classes.btnActions}>
-                          <Tooltip title='Edit Review'>
-                            <IconButton
-                              className={classes.editIconContainer}
-                              onClick={() => {
-                                dispatch(
-                                  propertyActions.getCurrentPropertyReview(
-                                    review
-                                  )
-                                );
-
-                                dispatch(
-                                  modalActions.showPropertyReviewModal()
-                                );
-                              }}>
-                              <EditIcon className={classes.editIcon} />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip title='Delete Review'>
-                            <IconButton
-                              className={classes.deleteIconContainer}
-                              onClick={() => {
-                                if (
-                                  window.confirm(
-                                    'Are you sure you want to delete this review?'
-                                  )
-                                ) {
+                        {review?.user?.id === user?.id && (
+                          <Box className={classes.btnActions}>
+                            <Tooltip title='Edit Review'>
+                              <IconButton
+                                className={classes.editIconContainer}
+                                onClick={() => {
                                   dispatch(
-                                    propertyActions.deletePropertyReview(
-                                      property.id,
-                                      review.id,
-                                      enqueueSnackbar
+                                    propertyActions.getCurrentPropertyReview(
+                                      review
                                     )
                                   );
-                                }
-                              }}>
-                              <DeleteIcon className={classes.deleteIcon} />
-                            </IconButton>
-                          </Tooltip>
-                        </Box>
+
+                                  dispatch(
+                                    modalActions.showPropertyReviewModal()
+                                  );
+                                }}>
+                                <EditIcon className={classes.editIcon} />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip title='Delete Review'>
+                              <IconButton
+                                className={classes.deleteIconContainer}
+                                onClick={() => {
+                                  if (
+                                    window.confirm(
+                                      'Are you sure you want to delete this review?'
+                                    )
+                                  ) {
+                                    dispatch(
+                                      propertyActions.deletePropertyReview(
+                                        property.id,
+                                        review.id,
+                                        enqueueSnackbar
+                                      )
+                                    );
+                                  }
+                                }}>
+                                <DeleteIcon className={classes.deleteIcon} />
+                              </IconButton>
+                            </Tooltip>
+                          </Box>
+                        )}
                       </Box>
 
                       <Typography

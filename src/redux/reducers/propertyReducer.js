@@ -51,11 +51,10 @@ const propertyReducer = (state = initialState, action) => {
     case types.UPDATE_PROPERTY:
       return {
         ...state,
-        allProperties: state.allProperties.map((property) =>
-          property.propertyId === action.payload.propertyId
+        property:
+          state.property.id === action.payload.id
             ? action.payload
-            : property
-        ),
+            : state.property,
         isLoading: false,
         error: null,
       };
