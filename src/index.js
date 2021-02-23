@@ -23,7 +23,7 @@ import store from './redux/reduxStore';
 import axios from 'axios';
 
 if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = process.env.BACKEND_BASE_URL;
+  axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 }
 
 ReactDOM.render(
