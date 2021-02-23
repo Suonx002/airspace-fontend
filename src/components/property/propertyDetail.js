@@ -67,21 +67,18 @@ const PropertyDetail = (props) => {
       },
       {
         icon: <PeopleIcon />,
-        title: `${property.guests} ${
-          property.guests === 1 ? 'Guest' : 'Guests'
-        }`,
+        title: `${property.guests} ${property.guests === 1 ? 'Guest' : 'Guests'
+          }`,
       },
       {
         icon: <MeetingRoomIcon />,
-        title: `${property.bedrooms} ${
-          property.bedrooms === 1 ? 'Bedroom' : 'Bedrooms'
-        }`,
+        title: `${property.bedrooms} ${property.bedrooms === 1 ? 'Bedroom' : 'Bedrooms'
+          }`,
       },
       {
         icon: <BathtubIcon />,
-        title: `${property.bathrooms} ${
-          property.bathrooms === 1 ? 'Bathroom' : 'Bathrooms'
-        }`,
+        title: `${property.bathrooms} ${property.bathrooms === 1 ? 'Bathroom' : 'Bathrooms'
+          }`,
       },
     ];
 
@@ -105,6 +102,11 @@ const PropertyDetail = (props) => {
                   {capitalizeString(property.user.firstName)}{' '}
                   {capitalizeString(property.user.lastName)}
                 </Typography>
+                {property?.user?.id === user?.id && (
+                  <Typography variant='body1' color='secondary'>
+                    Owner
+                  </Typography>
+                )}
               </Box>
 
               {property?.user?.id === user?.id && (
@@ -181,7 +183,7 @@ const PropertyDetail = (props) => {
                   Reviews
                 </Typography>
 
-                {/*  */}
+
                 <Box
                   m={2}
                   display='flex'
@@ -197,27 +199,29 @@ const PropertyDetail = (props) => {
                       Currently no review, would you like to create one?
                     </Typography>
                   )}
-                  {user ? (
-                    <Button
-                      variant='contained'
-                      color='primary'
-                      className={classes.noReviewBtn}
-                      onClick={() => {
-                        dispatch(modalActions.showPropertyReviewModal());
-                      }}>
-                      Create Review
-                    </Button>
-                  ) : (
-                    <Button
-                      variant='contained'
-                      color='primary'
-                      className={classes.noReviewBtn}
-                      onClick={() => {
-                        dispatch(modalActions.showLoginModal());
-                      }}>
-                      Login
-                    </Button>
-                  )}
+                  {
+                    property?.user?.id === user?.id ? null :
+                      user ? (
+                        <Button
+                          variant='contained'
+                          color='primary'
+                          className={classes.noReviewBtn}
+                          onClick={() => {
+                            dispatch(modalActions.showPropertyReviewModal());
+                          }}>
+                          Create Review
+                        </Button>
+                      ) : (
+                        <Button
+                          variant='contained'
+                          color='primary'
+                          className={classes.noReviewBtn}
+                          onClick={() => {
+                            dispatch(modalActions.showLoginModal());
+                          }}>
+                          Login
+                        </Button>
+                      )}
                 </Box>
 
                 {/* listing out reviews */}
@@ -332,7 +336,7 @@ const PropertyDetail = (props) => {
                     </Box>
                 </Box> */}
       </Box>
-    </section>
+    </section >
   ) : null;
 };
 

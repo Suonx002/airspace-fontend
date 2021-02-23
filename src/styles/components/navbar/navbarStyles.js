@@ -54,7 +54,7 @@ export default makeStyles(theme => ({
 
     },
     menuIcon: {
-        fontSize: 20,
+        fontSize: 40,
         fill: theme.palette.primary.main,
         padding: '0.35rem',
         border: `0.5px solid ${theme.palette.primary.main}`,

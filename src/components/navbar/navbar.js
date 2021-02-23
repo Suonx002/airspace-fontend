@@ -24,7 +24,7 @@ const Navbar = () => {
             <AppBar position='fixed' className={classes.appbar} elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     {/* logo */}
-                    <IconButton className={classes.logoContainer} component={Link} to="/">
+                    <IconButton className={classes.logoContainer} component={Link} to="/" disableRipple>
                         <img src={AirspaceLogo} alt="logo" className={classes.logo} />
                     </IconButton>
                     {/* right menu */}

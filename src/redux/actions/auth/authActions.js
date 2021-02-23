@@ -8,9 +8,7 @@ import handleTokenError from '../../../utils/methods/handleTokenError';
 
 export const getAuthUser = (enqueueSnackbar) => async (dispatch) => {
   try {
-    if (localStorage.jwtToken) {
-      setAuthToken(localStorage.jwtToken);
-    }
+    setAuthToken(localStorage.jwtToken);
 
     const res = await axios.get('/api/v1/users/me');
 
