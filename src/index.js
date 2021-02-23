@@ -4,16 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { SnackbarProvider } from 'notistack';
 
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from "@date-io/date-fns";
-
+import DateFnsUtils from '@date-io/date-fns';
 
 // slick slider
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import './styles/index.css';
 import App from './App';
@@ -21,6 +20,12 @@ import theme from './styles/theme';
 import reportWebVitals from './reportWebVitals';
 
 import store from './redux/reduxStore';
+import axios from 'axios';
+
+if (process.env.NODE_ENV === 'production') {
+  axios.defaults.baseURL = process.env.BACKEND_BASE_URL;
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -31,7 +36,7 @@ ReactDOM.render(
           maxSnack={3}
           anchorOrigin={{
             vertical: 'top',
-            horizontal: 'center'
+            horizontal: 'center',
           }}>
           <BrowserRouter>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
