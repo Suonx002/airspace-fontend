@@ -11,6 +11,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_AUTH_USER:
+    case types.UPDATE_USER_ROLE_TO_HOST:
       return {
         ...state,
         isAuthenticated: true,
